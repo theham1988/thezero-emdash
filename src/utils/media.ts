@@ -9,7 +9,10 @@ const WP_ORIGINS = ["https://thezerophuket.com", "http://thezerophuket.com", "ht
 export function localUrl(url: string | null | undefined): string | undefined {
 	if (!url) return undefined;
 	for (const origin of WP_ORIGINS) {
-		if (url.startsWith(`${origin}/wp-content/`)) return encodeURI(decodeURI(url.slice(origin.length)));
+		if (url.startsWith(`${origin}/wp-content/`)) {
+			// File names are stored ASCII-only on this site (an em dash becomes a hyphen).
+			return encodeURI(decodeURI(url.slice(origin.length)).replace(/[\u2013\u2014]/g, "-"));
+		}
 	}
 	return url;
 }
