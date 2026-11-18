@@ -1,0 +1,14 @@
+---
+// Image block inside a post's body.
+const node = (Astro.props as any).node ?? Astro.props;
+const src = node?.asset?.url;
+---
+
+{
+	src && (
+		<figure class="post-figure">
+			<img src={src} alt={node.alt ?? ""} loading="lazy" decoding="async" />
+			{node.caption && <figcaption>{node.caption}</figcaption>}
+		</figure>
+	)
+}

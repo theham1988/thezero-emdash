@@ -2,31 +2,70 @@
 import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
 import Base from "../layouts/Base.astro";
 import PageView from "../components/PageView.astro";
+import PostView from "../components/blog/PostView.astro";
+import { firstParagraph, imageUrl } from "../utils/media";
 import { heroSeoDefaults } from "../utils/page";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug) return Astro.rewrite("/404");
 
 const { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
-if (!page) return Astro.rewrite("/404");
 
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+// Blog posts keep their WordPress URLs (/{slug}), so a slug that is not a
+// page is looked up as a post.
+const postResult = page ? null : await (getEmDashEntry as any)("posts", slug);
+const post = postResult?.entry as any;
+if (!page && !post) return Astro.rewrite("/404");
 
-const seo = getSeoMeta(page, {
-	siteUrl: Astro.url.origin,
-	path: `/${page.id}`,
-	...heroSeoDefaults(page.data.content, Astro.url.origin),
-});
+if (Astro.cache?.enabled) Astro.cache.set(page ? cacheHint : postResult.cacheHint);
+
+const seo = page
+	? getSeoMeta(page, {
+			siteUrl: Astro.url.origin,
+			path: `/${page.id}`,
+			...heroSeoDefaults(page.data.content, Astro.url.origin),
+		})
+	: getSeoMeta(post, {
+			siteUrl: Astro.url.origin,
+			path: `/${post.id}`,
+			defaultDescription: post.data.excerpt || firstParagraph(post.data.content) || undefined,
+			defaultOgImage: absoluteImage(imageUrl(post.data.featured_image)),
+		});
+
+function absoluteImage(url: string | undefined) {
+	if (!url) return undefined;
+	try {
+		return new URL(url, Astro.url.origin).href;
+	} catch {
+		return undefined;
+	}
+}
 ---
 
-<Base
-	title={seo.title}
-	pageTitle={page.data.title}
-	description={seo.description}
-	image={seo.ogImage}
-	canonical={seo.canonical}
-	robots={seo.robots}
-	content={{ collection: "pages", id: page.data.id, slug: page.id }}
->
-	<PageView page={page} />
-</Base>
+{
+	page ? (
+		<Base
+			title={seo.title}
+			pageTitle={page.data.title}
+			description={seo.description}
+			image={seo.ogImage}
+			canonical={seo.canonical}
+			robots={seo.robots}
+			content={{ collection: "pages", id: page.data.id, slug: page.id }}
+		>
+			<PageView page={page} />
+		</Base>
+	) : (
+		<Base
+			title={seo.title}
+			pageTitle={post.data.title}
+			description={seo.description}
+			image={seo.ogImage}
+			canonical={seo.canonical}
+			robots={seo.robots}
+			content={{ collection: "posts", id: post.data.id, slug: post.id }}
+		>
+			<PostView post={post} />
+		</Base>
+	)
+}
