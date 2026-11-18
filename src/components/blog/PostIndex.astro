@@ -54,7 +54,7 @@ const tabs = [
 								<a href={`/${post.id}`} class="post-card__link">
 									{img && (
 										<div class="post-card__media">
-											<img src={img} alt={post.data.featured_image?.alt ?? ""} loading="lazy" decoding="async" />
+											<img src={img} alt={post.data.featured_image?.alt ?? ""} loading="lazy" decoding="async" onerror="this.remove()" />
 										</div>
 									)}
 									<div class="post-card__body">

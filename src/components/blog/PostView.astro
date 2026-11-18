@@ -24,7 +24,7 @@ const content = localizeContent(post.data.content);
 	{
 		hero && (
 			<div class="media post__hero" {...post.edit.featured_image}>
-				<img class="media__img" src={hero} alt={post.data.featured_image?.alt ?? ""} decoding="async" fetchpriority="high" />
+				<img class="media__img" src={hero} alt={post.data.featured_image?.alt ?? ""} decoding="async" fetchpriority="high" onerror="this.closest('.media').remove()" />
 			</div>
 		)
 	}
