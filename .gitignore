@@ -12,6 +12,8 @@ dist/
 data.db
 data.db-*
 uploads/
+# Images carried over from WordPress are served from their original paths
+!/public/wp-content/uploads/
 .wrangler/
 
 # Environment
