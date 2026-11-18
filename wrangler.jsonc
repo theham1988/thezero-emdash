@@ -16,6 +16,13 @@
 			"bucket_name": "my-marketing-media","preview_bucket_name": "my-marketing-media",
 		},
 	],
+	// Lead gateway: audit log and duplicate-submit window (src/lead-gateway)
+	"kv_namespaces": [
+		{
+			"binding": "LEADS",
+			"id": "81e4b72b4fd04b0c87b155a7b606f9b2",
+		},
+	],
 	// Co-editing rooms, one Durable Object per entry being edited
 	"durable_objects": {
 		"bindings": [{ "name": "EMDASH_ROOMS", "class_name": "EmDashRoom" }],
