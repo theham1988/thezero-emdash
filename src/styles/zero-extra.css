@@ -1,0 +1,38 @@
+/*
+ * Additions to the design's styles.css (src/design/styles.css) for things
+ * the three designed pages don't have: a skip link, the article page and
+ * the not-found page. Composed from the design's own tokens.
+ */
+.skip-link{position:absolute;left:16px;top:-80px;z-index:100;padding:12px 18px;border-radius:999px;background:var(--bronze);color:#fff;font-family:"Josefin Sans",sans-serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.skip-link:focus{top:12px}
+a.mtab{display:inline-flex;align-items:center}
+
+.article{padding-top:calc(var(--nav-h) + clamp(40px,6vw,80px))}
+.article-wrap{width:min(820px,100% - 32px);margin-inline:auto}
+.article-head{display:grid;gap:22px;margin-bottom:40px}
+.article-head h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.22;letter-spacing:.01em}
+.article-date{font-size:.88rem;color:var(--muted)}
+.article-figure{width:min(1200px,100% - 32px);margin:0 auto 48px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.article-figure img{width:100%;height:auto;max-height:640px;object-fit:cover}
+.article-body{font-size:1.05rem;line-height:1.8;color:var(--text)}
+.article-body > * + *{margin-top:1.1em}
+.article-body :is(h2,h3,h4){color:var(--ink);font-weight:300;line-height:1.3;letter-spacing:.01em}
+.article-body :is(h2,h3,h4) strong{font-weight:inherit}
+.article-body h2{margin-top:2em;font-size:1.75rem}
+.article-body :is(h3,h4){margin-top:1.7em;font-size:1.35rem}
+.article-body :is(ul,ol){padding-left:1.4em}
+.article-body li + li{margin-top:.45em}
+.article-body li::marker{color:var(--bronze)}
+.article-body a{color:var(--bronze);background:linear-gradient(var(--gold),var(--gold)) 0 100%/100% 1px no-repeat;transition:color .3s,background-size .3s}
+.article-body a:hover{color:var(--ink);background-size:100% 2px}
+.article-body strong{font-weight:600;color:var(--ink)}
+.article-body blockquote{padding-left:22px;border-left:1px solid var(--gold);color:var(--muted)}
+.article-body figure{margin-block:2em}
+.article-body img{width:100%;height:auto;border-radius:var(--radius)}
+.article-body figcaption{margin-top:10px;font-size:.88rem;color:var(--muted)}
+.article-body table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;font-size:.95rem}
+.article-body :is(th,td){padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.article-foot{display:flex;justify-content:center;margin-top:64px;padding-top:40px;border-top:1px solid var(--line)}
+
+.notice{min-height:70vh;display:grid;place-items:center;text-align:center;padding-top:calc(var(--nav-h) + 72px)}
+.notice h1{font-weight:200;font-size:clamp(2.2rem,4.2vw,3.8rem);letter-spacing:.06em;text-transform:uppercase;color:var(--bronze);margin-bottom:32px}

@@ -1,5 +1,62 @@
 ---
-import PostIndex from "../../components/blog/PostIndex.astro";
+/**
+ * Media page ("The Zero Magazine"): banner, magazine flipbook, then
+ * News / Blogs / Press tabs with the six latest of each, as designed.
+ * News and Blogs come from the CMS; Press is the designed list.
+ */
+import { getEmDashCollection } from "emdash";
+import PostCards from "../../components/blog/PostCards.astro";
+import flipbook from "../../design/flipbook.html?raw";
+import intros from "../../design/media-intros.json";
+import pressCards from "../../design/press-cards.html?raw";
+import Site from "../../layouts/Site.astro";
+
+const latest = async (category: string) => {
+	const result = await (getEmDashCollection as any)("posts", {
+		status: "published",
+		orderBy: { published_at: "desc" },
+		limit: 6,
+		where: { category },
+	});
+	if (Astro.cache?.enabled) Astro.cache.set(result.cacheHint);
+	return result.entries as any[];
+};
+const [news, blogs] = await Promise.all([latest("news"), latest("blog")]);
+const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 ---
 
-<PostIndex title="Media" path="/media" />
+<Site title="Media" description={intros.news} canonical={`${Astro.url.origin}/media`} active="/media">
+	<section class="page-hero" id="top">
+		<div class="wrap">
+			<span class="eyebrow">Media</span>
+			<h1>The Zero Magazine</h1>
+		</div>
+	</section>
+
+	<Fragment set:html={flipbook} />
+
+	<section class="media" id="media">
+		<div class="wrap">
+			<div class="mtabs reveal" role="tablist" aria-label="Media">
+				<button class="mtab on" type="button" role="tab" id="mtab-news" aria-controls="mpanel-news" aria-selected="true" data-mtab="news">News</button>
+				<button class="mtab" type="button" role="tab" id="mtab-blogs" aria-controls="mpanel-blogs" aria-selected="false" data-mtab="blogs">Blogs</button>
+				<button class="mtab" type="button" role="tab" id="mtab-press" aria-controls="mpanel-press" aria-selected="false" data-mtab="press">Press</button>
+			</div>
+			<div class="mpanel" id="mpanel-news" role="tabpanel" aria-labelledby="mtab-news">
+				<p class="mintro">{intros.news}</p>
+				<div class="mgrid"><PostCards posts={news} tag="News" /></div>
+				<div class="mfoot"><a class="btn btn-outline" href="/media/news">Read all news <Fragment set:html={arrow} /></a></div>
+			</div>
+			<div class="mpanel" id="mpanel-blogs" role="tabpanel" aria-labelledby="mtab-blogs" hidden>
+				<p class="mintro">{intros.blogs}</p>
+				<div class="mgrid"><PostCards posts={blogs} tag="Blog" /></div>
+				<div class="mfoot"><a class="btn btn-outline" href="/media/blogs">Read all blogs <Fragment set:html={arrow} /></a></div>
+			</div>
+			<div class="mpanel" id="mpanel-press" role="tabpanel" aria-labelledby="mtab-press" hidden>
+				<p class="mintro">{intros.press}</p>
+				<div class="mgrid"><Fragment set:html={pressCards} /></div>
+				<div class="mfoot"><a class="btn btn-outline" href="/media/press">Read all press <Fragment set:html={arrow} /></a></div>
+			</div>
+		</div>
+	</section>
+</Site>

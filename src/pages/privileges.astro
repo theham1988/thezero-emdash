@@ -1,0 +1,9 @@
+---
+import mainHtml from "../design/privileges.main.html?raw";
+import pageScript from "../design/privileges.script.js?raw";
+import Site from "../layouts/Site.astro";
+---
+
+<Site title="Privileges" active="/privileges" pageScript={pageScript}>
+	<Fragment set:html={mainHtml} />
+</Site>

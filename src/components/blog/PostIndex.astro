@@ -1,71 +1,63 @@
 ---
+/**
+ * Full listing of one media category (/media/news, /media/blogs), or the
+ * static press list (/media/press), in the Media page's design.
+ */
 import { getEmDashCollection } from "emdash";
+import intros from "../../design/media-intros.json";
+import pressCards from "../../design/press-cards.html?raw";
 import Site from "../../layouts/Site.astro";
-import { imageUrl } from "../../utils/media";
+import PostCards from "./PostCards.astro";
 
 interface Props {
-	title: string;
-	/** Category slug to filter by. Omit to list everything. */
-	category?: string;
-	path: string;
+	kind: "news" | "blogs" | "press";
 }
 
-const { title, category, path } = Astro.props;
-const { entries, cacheHint } = await (getEmDashCollection as any)("posts", {
-	status: "published",
-	orderBy: { published_at: "desc" },
-	limit: 100,
-	...(category ? { where: { category } } : {}),
-});
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
-const posts = entries as any[];
+const { kind } = Astro.props;
+const META = {
+	news: { title: "News", category: "news", tag: "News" },
+	blogs: { title: "Blogs", category: "blog", tag: "Blog" },
+	press: { title: "Press", category: null, tag: undefined },
+} as const;
+const meta = META[kind];
 
+let posts: any[] = [];
+if (meta.category) {
+	const { entries, cacheHint } = await (getEmDashCollection as any)("posts", {
+		status: "published",
+		orderBy: { published_at: "desc" },
+		limit: 100,
+		where: { category: meta.category },
+	});
+	if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+	posts = entries;
+}
 const tabs = [
-	{ label: "All", href: "/media" },
-	{ label: "News", href: "/media/news", slug: "news" },
-	{ label: "Blogs", href: "/media/blogs", slug: "blog" },
+	{ label: "News", href: "/media/news", kind: "news" },
+	{ label: "Blogs", href: "/media/blogs", kind: "blogs" },
+	{ label: "Press", href: "/media/press", kind: "press" },
 ];
-const LABELS: Record<string, string> = { news: "News", blog: "Blog" };
-const tagFor = (post: any): string | undefined =>
-	category ? LABELS[category] : (post.data.terms?.category?.[0]?.label ?? undefined);
-const banner = "/wp-content/uploads/2025/08/ZEBT_Perspective01-scaled-1-1.jpg";
 ---
 
-<Site title={title} canonical={`${Astro.url.origin}${path}`} overHero active="/media">
-	<section class="page-hero" style={`--page-hero-image:url(${banner})`}>
+<Site title={meta.title} description={intros[kind]} canonical={`${Astro.url.origin}/media/${kind}`} active="/media">
+	<section class="page-hero" id="top">
 		<div class="wrap">
-			<h1>{title}</h1>
+			<span class="eyebrow">Media</span>
+			<h1>{meta.title}</h1>
 		</div>
 	</section>
-	<section class="media">
+	<section class="media" id="media">
 		<div class="wrap">
-			<nav class="mtabs" aria-label="Categories">
+			<nav class="mtabs" aria-label="Media">
 				{tabs.map((tab) => (
-					<a href={tab.href} class:list={["mtab", { on: tab.href === path }]} aria-current={tab.href === path ? "page" : undefined}>
+					<a class:list={["mtab", { on: tab.kind === kind }]} href={tab.href} aria-current={tab.kind === kind ? "page" : undefined}>
 						{tab.label}
 					</a>
 				))}
 			</nav>
+			<p class="mintro">{intros[kind]}</p>
 			<div class="mgrid">
-				{posts.map((post) => {
-					const img = imageUrl(post.data.featured_image);
-					const tag = tagFor(post);
-					return (
-						<a class="mcard" href={`/${post.id}`}>
-							<span class="mimg">
-								{img && <img src={img} alt={post.data.featured_image?.alt ?? ""} loading="lazy" decoding="async" onerror="this.remove()" />}
-							</span>
-							<span class="mbody">
-								{tag && <span class="mtag">{tag}</span>}
-								<span class="mhead">{post.data.title}</span>
-								<span class="mmore">
-									Read more
-									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-								</span>
-							</span>
-						</a>
-					);
-				})}
+				{kind === "press" ? <Fragment set:html={pressCards} /> : <PostCards posts={posts} tag={meta.tag} />}
 			</div>
 		</div>
 	</section>
