@@ -11,163 +11,26 @@ const { post } = Astro.props;
 const hero = imageUrl(post.data.featured_image);
 const published = post.data.publishedAt ?? post.data.createdAt;
 const content = localizeContent(post.data.content);
+const category = post.data.terms?.category?.[0]?.label;
 ---
 
-<article class="container section post">
-	<header class="post__header">
-		<a href="/media" class="text-link post__back">All articles</a>
-		<h1 class="display post__title" {...post.edit.title}>{post.data.title}</h1>
-		{published && (
-			<time class="post__date" datetime={new Date(published).toISOString()}>{formatDate(published)}</time>
-		)}
+<article class="article">
+	<header class="article-wrap article-head">
+		{category && <span class="eyebrow">{category}</span>}
+		<h1 {...post.edit.title}>{post.data.title}</h1>
+		{published && <time class="article-date" datetime={new Date(published).toISOString()}>{formatDate(published)}</time>}
 	</header>
 	{
 		hero && (
-			<div class="media post__hero" {...post.edit.featured_image}>
-				<img class="media__img" src={hero} alt={post.data.featured_image?.alt ?? ""} decoding="async" fetchpriority="high" onerror="this.closest('.media').remove()" />
+			<div class="article-figure" {...post.edit.featured_image}>
+				<img src={hero} alt={post.data.featured_image?.alt ?? ""} decoding="async" fetchpriority="high" onerror="this.closest('.article-figure').remove()" />
 			</div>
 		)
 	}
-	<div class="post__body" {...post.edit.content}>
+	<div class="article-wrap article-body" {...post.edit.content}>
 		<PortableText value={content} components={{ type: { image: PostImage } }} />
 	</div>
+	<div class="article-wrap article-foot">
+		<a href="/media" class="btn btn-outline">Media</a>
+	</div>
 </article>
-
-<style>
-	.post {
-		padding-block-start: clamp(56px, 7vw, 104px);
-	}
-
-	.post__header {
-		display: grid;
-		gap: 16px;
-		max-width: 68ch;
-	}
-
-	.post__back {
-		justify-self: start;
-		font-size: 14.5px;
-	}
-
-	.post__title {
-		font-size: var(--font-size-h2);
-		line-height: var(--leading-snug);
-		text-wrap: balance;
-	}
-
-	.post__date {
-		font-size: 14.5px;
-		color: var(--color-muted);
-	}
-
-	.post__hero {
-		margin-block: 40px;
-		max-width: 1000px;
-	}
-
-	.post__hero img {
-		display: block;
-		width: 100%;
-		height: auto;
-		max-height: 620px;
-		object-fit: cover;
-	}
-
-	.post__body {
-		max-width: 68ch;
-		font-size: 17px;
-		line-height: 1.7;
-		color: var(--color-text-secondary);
-		text-wrap: pretty;
-	}
-
-	.post__body > :global(* + *) {
-		margin-block-start: 1em;
-	}
-
-	.post__body :global(:is(h2, h3, h4)) {
-		font-family: var(--font-display);
-		font-weight: var(--font-weight-display);
-		line-height: var(--leading-snug);
-		letter-spacing: var(--tracking-snug);
-		color: var(--color-text);
-		text-wrap: balance;
-	}
-
-	.post__body :global(:is(h2, h3, h4) strong) {
-		font-weight: inherit;
-	}
-
-	.post__body :global(h2) {
-		margin-block-start: 1.8em;
-		font-size: 30px;
-	}
-
-	.post__body :global(:is(h3, h4)) {
-		margin-block-start: 1.5em;
-		font-size: 23px;
-	}
-
-	.post__body :global(:is(ul, ol)) {
-		padding-inline-start: 1.4em;
-	}
-
-	.post__body :global(ul) {
-		list-style: disc;
-	}
-
-	.post__body :global(ol) {
-		list-style: decimal;
-	}
-
-	.post__body :global(li + li) {
-		margin-block-start: 0.4em;
-	}
-
-	.post__body :global(a) {
-		color: var(--color-text);
-		text-decoration: underline;
-		text-decoration-color: var(--color-border-strong);
-		text-underline-offset: 3px;
-	}
-
-	.post__body :global(strong) {
-		font-weight: 600;
-		color: var(--color-text);
-	}
-
-	.post__body :global(blockquote) {
-		padding-inline-start: 20px;
-		border-inline-start: 2px solid var(--color-border-strong);
-	}
-
-	.post__body :global(figure) {
-		margin-block: 1.6em;
-	}
-
-	.post__body :global(img) {
-		display: block;
-		max-width: 100%;
-		height: auto;
-		border-radius: var(--radius-media);
-	}
-
-	.post__body :global(figcaption) {
-		margin-block-start: 8px;
-		font-size: 13.5px;
-		color: var(--color-muted);
-	}
-
-	.post__body :global(table) {
-		display: block;
-		max-width: 100%;
-		overflow-x: auto;
-		border-collapse: collapse;
-		font-size: 15px;
-	}
-
-	.post__body :global(:is(th, td)) {
-		padding: 10px 14px;
-		text-align: start;
-	}
-</style>

@@ -1,17 +1,16 @@
 ---
 import { getEmDashCollection } from "emdash";
-import Base from "../../layouts/Base.astro";
-import { firstParagraph, formatDate, imageUrl } from "../../utils/media";
+import Site from "../../layouts/Site.astro";
+import { imageUrl } from "../../utils/media";
 
 interface Props {
 	title: string;
-	intro?: string;
 	/** Category slug to filter by. Omit to list everything. */
 	category?: string;
 	path: string;
 }
 
-const { title, intro, category, path } = Astro.props;
+const { title, category, path } = Astro.props;
 const { entries, cacheHint } = await (getEmDashCollection as any)("posts", {
 	status: "published",
 	orderBy: { published_at: "desc" },
@@ -23,138 +22,51 @@ const posts = entries as any[];
 
 const tabs = [
 	{ label: "All", href: "/media" },
-	{ label: "Blog", href: "/media/blogs" },
-	{ label: "News", href: "/media/news" },
+	{ label: "News", href: "/media/news", slug: "news" },
+	{ label: "Blogs", href: "/media/blogs", slug: "blog" },
 ];
+const LABELS: Record<string, string> = { news: "News", blog: "Blog" };
+const tagFor = (post: any): string | undefined =>
+	category ? LABELS[category] : (post.data.terms?.category?.[0]?.label ?? undefined);
+const banner = "/wp-content/uploads/2025/08/ZEBT_Perspective01-scaled-1-1.jpg";
 ---
 
-<Base title={title} description={intro} canonical={`${Astro.url.origin}${path}`}>
-	<section class="container section post-index">
-		<header class="section-header">
-			<h1 class="section-headline">{title}</h1>
-			{intro && <p class="lead">{intro}</p>}
-			<nav class="post-tabs" aria-label="Post categories">
+<Site title={title} canonical={`${Astro.url.origin}${path}`} overHero active="/media">
+	<section class="page-hero" style={`--page-hero-image:url(${banner})`}>
+		<div class="wrap">
+			<h1>{title}</h1>
+		</div>
+	</section>
+	<section class="media">
+		<div class="wrap">
+			<nav class="mtabs" aria-label="Categories">
 				{tabs.map((tab) => (
-					<a href={tab.href} class:list={["post-tab", { "post-tab--active": tab.href === path }]} aria-current={tab.href === path ? "page" : undefined}>
+					<a href={tab.href} class:list={["mtab", { on: tab.href === path }]} aria-current={tab.href === path ? "page" : undefined}>
 						{tab.label}
 					</a>
 				))}
 			</nav>
-		</header>
-		{
-			posts.length === 0 ? (
-				<p class="lead">No posts yet.</p>
-			) : (
-				<div class="post-grid">
-					{posts.map((post) => {
-						const img = imageUrl(post.data.featured_image);
-						const summary = post.data.excerpt || firstParagraph(post.data.content, 150);
-						return (
-							<article class="card card--lift post-card">
-								<a href={`/${post.id}`} class="post-card__link">
-									{img && (
-										<div class="post-card__media">
-											<img src={img} alt={post.data.featured_image?.alt ?? ""} loading="lazy" decoding="async" onerror="this.remove()" />
-										</div>
-									)}
-									<div class="post-card__body">
-										<time class="post-card__date" datetime={new Date(post.data.publishedAt ?? post.data.createdAt).toISOString()}>
-											{formatDate(post.data.publishedAt ?? post.data.createdAt)}
-										</time>
-										<h2 class="post-card__title">{post.data.title}</h2>
-										{summary && <p class="post-card__summary">{summary}</p>}
-									</div>
-								</a>
-							</article>
-						);
-					})}
-				</div>
-			)
-		}
+			<div class="mgrid">
+				{posts.map((post) => {
+					const img = imageUrl(post.data.featured_image);
+					const tag = tagFor(post);
+					return (
+						<a class="mcard" href={`/${post.id}`}>
+							<span class="mimg">
+								{img && <img src={img} alt={post.data.featured_image?.alt ?? ""} loading="lazy" decoding="async" onerror="this.remove()" />}
+							</span>
+							<span class="mbody">
+								{tag && <span class="mtag">{tag}</span>}
+								<span class="mhead">{post.data.title}</span>
+								<span class="mmore">
+									Read more
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+								</span>
+							</span>
+						</a>
+					);
+				})}
+			</div>
+		</div>
 	</section>
-</Base>
-
-<style>
-	.post-index {
-		padding-block-start: clamp(56px, 7vw, 104px);
-	}
-
-	.post-tabs {
-		display: inline-flex;
-		gap: 4px;
-		margin-block-start: 24px;
-		padding: 4px;
-		border-radius: var(--radius-full);
-		background: var(--color-sunken);
-	}
-
-	.post-tab {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
-		padding-inline: 18px;
-		border-radius: var(--radius-full);
-		font-size: 14.5px;
-		color: var(--color-text-secondary);
-	}
-
-	.post-tab--active {
-		background: var(--color-surface);
-		color: var(--color-text);
-		box-shadow: var(--shadow-card);
-	}
-
-	.post-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
-		gap: 24px;
-		margin-block-start: 40px;
-	}
-
-	.post-card {
-		padding: 0;
-		overflow: hidden;
-	}
-
-	.post-card__link {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-	}
-
-	.post-card__media {
-		aspect-ratio: 16 / 10;
-		background: var(--color-sunken);
-	}
-
-	.post-card__media img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.post-card__body {
-		display: grid;
-		gap: 10px;
-		padding: 22px;
-	}
-
-	.post-card__date {
-		font-size: 13px;
-		color: var(--color-muted);
-	}
-
-	.post-card__title {
-		font-family: var(--font-display);
-		font-weight: var(--font-weight-display);
-		font-size: 24px;
-		line-height: 1.2;
-		text-wrap: balance;
-	}
-
-	.post-card__summary {
-		font-size: 14.5px;
-		line-height: 1.6;
-		color: var(--color-text-secondary);
-	}
-</style>
+</Site>

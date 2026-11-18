@@ -1,0 +1,47 @@
+---
+/**
+ * Renders a blog post. Visitors reach it at /{slug} (the WordPress URL):
+ * src/pages/[slug].astro rewrites here when the slug is not a page.
+ */
+import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
+import PostView from "../../components/blog/PostView.astro";
+import Site from "../../layouts/Site.astro";
+import { firstParagraph, imageUrl } from "../../utils/media";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.rewrite("/404");
+
+const result = await (getEmDashEntry as any)("posts", slug);
+const post = result?.entry as any;
+if (!post) return Astro.rewrite("/404");
+
+if (Astro.cache?.enabled) Astro.cache.set(result.cacheHint);
+
+const hero = imageUrl(post.data.featured_image);
+let ogImage: string | undefined;
+try {
+	ogImage = hero ? new URL(hero, Astro.url.origin).href : undefined;
+} catch {
+	ogImage = undefined;
+}
+
+const seo = getSeoMeta(post, {
+	siteUrl: Astro.url.origin,
+	path: `/${post.id}`,
+	defaultDescription: post.data.excerpt || firstParagraph(post.data.content) || undefined,
+	defaultOgImage: ogImage,
+});
+---
+
+<Site
+	title={seo.title}
+	pageTitle={post.data.title}
+	description={seo.description}
+	image={seo.ogImage}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	content={{ collection: "posts", id: post.data.id, slug: post.id }}
+	active="/media"
+>
+	<PostView post={post} />
+</Site>

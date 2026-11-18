@@ -1,0 +1,194 @@
+---
+/**
+ * Site layout in The Zero Phuket design system: glass header, footer,
+ * floating WhatsApp button and the mobile action bar, plus the shared
+ * tracking. Pages rebuilt in the design system use this layout.
+ */
+import { getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashBodyEnd, EmDashBodyStart, EmDashHead } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { trackingBody, trackingHead } from "../tracking";
+import { resolveSiteIdentity } from "../utils/site";
+import "../styles/zero.css";
+
+interface Props {
+	title?: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	robots?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+	/** Header starts as clear glass over a photo banner. Without it the header is solid. */
+	overHero?: boolean;
+	/** Path of the active menu item, e.g. "/media". */
+	active?: string;
+}
+
+const { title, pageTitle, description, image, canonical, robots, content, overHero = false, active } = Astro.props;
+
+const settingsResult = await getSiteSettingsWithCacheHint();
+if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
+const { siteTitle, siteTagline, titleSeparator } = resolveSiteIdentity(settingsResult.data);
+const fullTitle = title ? (title.includes(siteTitle) ? title : `${title} ${titleSeparator} ${siteTitle}`) : siteTitle;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title ?? siteTitle,
+	description: description || siteTagline || undefined,
+	canonical: canonical ?? `${Astro.url.origin}${Astro.url.pathname}`,
+	image,
+	content,
+	seo: { ogImage: image, robots },
+	siteName: siteTitle,
+});
+
+const menu = [
+	{ label: "Home", href: "/" },
+	{ label: "About Us", href: "/about-us" },
+	{ label: "Projects", href: "/projects" },
+	{ label: "Media", href: "/media" },
+	{ label: "Privileges", href: "/privileges" },
+	{ label: "Gallery", href: "/gallery" },
+	{ label: "Contact", href: "/contact" },
+];
+const WHATSAPP = "https://wa.me/66956516795";
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		<Fragment set:html={trackingHead} />
+		<EmDashHead page={pageCtx} />
+		<link rel="icon" href="/brand/logo_zero.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600&family=Dosis:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<Fragment set:html={trackingBody} />
+		<EmDashBodyStart page={pageCtx} />
+		<a href="#main" class="skip-link">Skip to content</a>
+		<header class:list={["nav", { scrolled: !overHero }]} data-over-hero={overHero ? "true" : undefined}>
+			<div class="bar">
+				<div class="wrap">
+					<a href="/" class="logo" aria-label="The Zero Phuket home">
+						<img src="/brand/logo_zero.png" alt="The Zero Phuket" width="663" height="450" />
+					</a>
+					<nav class="menus" id="menus" aria-label="Main">
+						<ul class="menu">
+							{menu.map((item) => (
+								<li>
+									<a href={item.href} class:list={[{ active: item.href === active }]} aria-current={item.href === active ? "page" : undefined}>
+										{item.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+					<div class="bar-actions">
+						<a class="soc" href="https://www.facebook.com/profile.php?id=61558317737550" target="_blank" rel="noopener" aria-label="Facebook">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6c0-.8.2-1.2 1.4-1.2H17V2h-2.6C11.3 2 10 3.6 10 6.3V8H8v3h2v11h4V11h2.7l.3-3z" /></svg>
+						</a>
+						<a class="soc" href="https://www.instagram.com/thezerophuket/" target="_blank" rel="noopener" aria-label="Instagram">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" /></svg>
+						</a>
+						<a class="soc" href={WHATSAPP} target="_blank" rel="noopener" aria-label="WhatsApp">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.4z" /></svg>
+						</a>
+						<a href="/contact" class="btn btn-gold bar-cta">Get Pricing</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main id="main" tabindex="-1">
+			<slot />
+		</main>
+
+		<footer class="footer">
+			<div class="wrap">
+				<div class="foot-grid">
+					<div>
+						<a href="/" class="logo"><img src="/brand/logo_zero.png" alt="The Zero Phuket" width="663" height="450" loading="lazy" /></a>
+						<p>Sustainable, luxury living on Bang Tao and Nai Yang beaches — from the award-winning team behind The Zero London.</p>
+						<div class="socials">
+							<a href="https://www.facebook.com/profile.php?id=61558317737550" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6c0-.8.2-1.2 1.4-1.2H17V2h-2.6C11.3 2 10 3.6 10 6.3V8H8v3h2v11h4V11h2.7l.3-3z" /></svg></a>
+							<a href="https://www.instagram.com/thezerophuket/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" /></svg></a>
+							<a href={WHATSAPP} target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.4z" /></svg></a>
+						</div>
+					</div>
+					<div>
+						<h5>Sales Galleries</h5>
+						<ul>
+							<li><a href="https://maps.app.goo.gl/NxkoTwURPSNAANDV8" target="_blank" rel="noopener">Main Sales Gallery</a></li>
+							<li><a href="https://maps.app.goo.gl/ThmveetXqpcFwryb9" target="_blank" rel="noopener">Bang Tao Sales Gallery</a></li>
+							<li><a href="https://maps.app.goo.gl/TGUMmL2ya1te6Ymf7" target="_blank" rel="noopener">Silhouette Sales Gallery</a></li>
+						</ul>
+					</div>
+					<div>
+						<h5>Projects</h5>
+						<ul>
+							<li><a href="/bang-tao">The Zero Bang Tao</a></li>
+							<li><a href="/silhouette-nai-yang">Silhouette, Nai Yang</a></li>
+							<li><a href="/london">The Zero London</a></li>
+						</ul>
+					</div>
+					<div>
+						<h5>Contact</h5>
+						<ul>
+							<li><a href="tel:+66956516795">+66 95 651 6795</a></li>
+							<li><a href="mailto:info@thezerophuket.com">info@thezerophuket.com</a></li>
+							<li>58/8 Lagoon Road, Cherngtalay, Thalang, Phuket</li>
+						</ul>
+					</div>
+				</div>
+				<div class="foot-bottom">
+					<span>© The Zero {year}. All rights reserved.</span>
+					<span><a href="/pdpa-privacy-notice-terms">PDPA Policy</a></span>
+				</div>
+			</div>
+		</footer>
+
+		<a class="wa" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+			<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.4z" /></svg>
+		</a>
+		<div class="mobile-bar">
+			<a href={WHATSAPP} target="_blank" rel="noopener" class="btn btn-outline">WhatsApp</a>
+			<a href="/contact" class="btn btn-bronze">Get Pricing</a>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var nav = document.querySelector(".nav");
+				if (nav && nav.dataset.overHero) {
+					var onScroll = function () {
+						nav.classList.toggle("scrolled", window.scrollY > 40);
+					};
+					window.addEventListener("scroll", onScroll, { passive: true });
+					onScroll();
+				}
+				var menus = document.getElementById("menus");
+				if (menus) {
+					var atEnd = function () {
+						menus.classList.toggle("end", menus.scrollLeft + menus.clientWidth >= menus.scrollWidth - 4);
+					};
+					menus.addEventListener("scroll", atEnd, { passive: true });
+					window.addEventListener("resize", atEnd);
+					atEnd();
+				}
+			})();
+		</script>
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>
