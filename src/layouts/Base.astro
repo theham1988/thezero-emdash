@@ -5,6 +5,7 @@ import { EmDashBodyEnd, EmDashBodyStart, EmDashHead } from "emdash/ui";
 import { createPublicPageContext } from "emdash/page";
 import { Font } from "astro:assets";
 import { resolveSiteIdentity } from "../utils/site";
+import { trackingBody, trackingHead } from "../tracking";
 import "../styles/tokens.css";
 import "../styles/theme.css";
 
@@ -86,6 +87,7 @@ const wordmarkLength = [...siteTitle].length;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{fullTitle}</title>
+		<Fragment set:html={trackingHead} />
 		<EmDashHead page={pageCtx} />
 		<Font cssVariable="--font-body" preload />
 		<Font cssVariable="--font-display" preload={[{ style: "normal" }]} />
@@ -103,6 +105,7 @@ const wordmarkLength = [...siteTitle].length;
 		</script>
 	</head>
 	<body>
+		<Fragment set:html={trackingBody} />
 		<EmDashBodyStart page={pageCtx} />
 		<a href="#main" class="skip-link">Skip to content</a>
 		<header class="site-header">
