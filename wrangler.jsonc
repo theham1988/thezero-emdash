@@ -4,6 +4,15 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	// Keep the staging address (thezero-emdash.hamza-06b.workers.dev) working alongside the real domain.
+	"workers_dev": true,
+	// The real domain. Its DNS stays at Hostinger; Cloudflare accepts it through the
+	// satiwebsites.app zone (SSL/TLS > Custom Hostnames there), and these routes hand
+	// that traffic to this Worker.
+	"routes": [
+		{ "pattern": "thezerophuket.com/*", "zone_name": "satiwebsites.app" },
+		{ "pattern": "www.thezerophuket.com/*", "zone_name": "satiwebsites.app" },
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
