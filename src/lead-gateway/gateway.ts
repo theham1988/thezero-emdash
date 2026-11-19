@@ -105,7 +105,7 @@ async function writeLog(env: GatewayEnv, ref: string, status: string, body: Body
 		const ts = new Date().toISOString();
 		await env.LEADS.put(
 			`log:${ts}:${ref}`,
-			JSON.stringify({ ts, ref, status, channel: channelOf(body).channel, form_id: body.form_id, email: body.email, phone: body.phone, campaign: body.utm_campaign, page_url: body.page_url, extra: extra ?? null }),
+			JSON.stringify({ ts, ref, status, channel: channelOf(body).channel, form_id: body.form_id, email: body.email, phone: body.phone, campaign: body.utm_campaign, search_term: body.search_term || body.utm_term || "", landing_page: body.landing_page, page_url: body.page_url, extra: extra ?? null }),
 			{ expirationTtl: LOG_TTL_SEC },
 		);
 	} catch (e) {
@@ -194,6 +194,8 @@ function kommoPayload(body: Body, ref: string, recaptcha: { token: string; score
 			utm_campaign: campaign,
 			utm_content: body.utm_content || "",
 			utm_term: body.utm_term || "",
+			// Ads keyword (utm_term) or, when a search engine passes it, the organic search words
+			search_term: body.search_term || body.utm_term || "",
 			recaptcha_score: recaptcha.score == null ? "" : String(recaptcha.score),
 			ip: body._ip || "",
 			submitted_at: new Date().toISOString(),

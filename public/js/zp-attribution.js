@@ -40,13 +40,29 @@
 		stored = {};
 	}
 
+	// The words the visitor searched for, when the search engine passes them on.
+	// Google hides them for organic clicks; some other engines still send them.
+	function searchTermFrom(referrer) {
+		try {
+			var q = new URL(referrer).searchParams;
+			var names = ["q", "query", "text", "p", "wd", "keyword"];
+			for (var n = 0; n < names.length; n++) {
+				var t = q.get(names[n]);
+				if (t && t.trim()) return t.trim().slice(0, 200);
+			}
+		} catch (e) {}
+		return "";
+	}
+
 	if (hasAny) {
 		fromUrl.landing_page = window.location.href;
 		fromUrl.referrer = document.referrer || "";
+		fromUrl.search_term = fromUrl.utm_term || searchTermFrom(document.referrer);
 		stored = fromUrl;
 	} else if (!stored.landing_page) {
 		stored.landing_page = window.location.href;
 		stored.referrer = document.referrer || "";
+		stored.search_term = searchTermFrom(document.referrer);
 	}
 
 	try {

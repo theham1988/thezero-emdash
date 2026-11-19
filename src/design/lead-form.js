@@ -30,7 +30,7 @@
           lang_code: (document.cookie.match(/googtrans=\/en\/([^;]+)/) || [])[1] || 'en',
           page_url: location.href, landing_page: attr('landing_page'), referrer: attr('referrer'),
           utm_source: attr('utm_source'), utm_medium: attr('utm_medium'), utm_campaign: attr('utm_campaign'),
-          utm_content: attr('utm_content'), utm_term: attr('utm_term'),
+          utm_content: attr('utm_content'), utm_term: attr('utm_term'), search_term: attr('search_term'),
           gclid: attr('gclid'), gbraid: attr('gbraid'), wbraid: attr('wbraid'), gad_source: attr('gad_source')
         };
         const res = await fetch('/api/lead', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)});
