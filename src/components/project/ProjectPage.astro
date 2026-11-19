@@ -1,0 +1,338 @@
+---
+/**
+ * A project page (/bang-tao, /silhouette-nai-yang) in the site design.
+ * Content comes from src/data/projects.ts; the lead form posts to the gateway.
+ */
+import type { ProjectData } from "../../data/projects";
+import leadFormScript from "../../design/lead-form.js?raw";
+import sharedScript from "../../design/shared.js?raw";
+import Site from "../../layouts/Site.astro";
+
+interface Props {
+	project: ProjectData;
+}
+const { project: p } = Astro.props;
+const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>`;
+const quote = `<svg class="tcard-q" viewBox="0 0 32 24" aria-hidden="true"><path d="M0 24V14C0 6 5 1 13 0l1 3C9 5 7 8 7 12h6v12H0zm18 0V14c0-8 5-13 13-14l1 3c-5 2-7 5-7 9h6v12H18z" fill="currentColor"/></svg>`;
+const canonical = `${Astro.url.origin}/${p.slug}`;
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: p.faq.items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
+};
+const wide = (i: number) => (i % 7 === 0 ? "g-wide g-tall" : i % 7 === 4 ? "g-wide" : "");
+---
+
+<Site title={p.metaTitle} description={p.hero.lead} canonical={canonical} image={`${Astro.url.origin}${p.hero.image}`} pageScript={sharedScript + leadFormScript} recaptcha>
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+
+	<section class="page-hero page-hero--project" id="top" style={`--hero:url(${p.hero.image})`}>
+		<div class="wrap">
+			<span class="eyebrow">{p.hero.badges.join(" · ")}</span>
+			<h1>{p.hero.title}</h1>
+		</div>
+	</section>
+
+	<section class="project-intro" id="overview">
+		<div class="wrap">
+			<p class="project-lead reveal">{p.hero.lead}</p>
+			<div class="payplan reveal">
+				<h3>{p.heroNote.title}<small>{p.heroNote.text}</small></h3>
+				<div class="pay-steps">
+					{p.heroStats.map((s) => (<div><strong>{s.value}</strong><span>{s.label}</span></div>))}
+				</div>
+			</div>
+			<div class="mfoot"><a href="#contact" class="btn btn-bronze">{p.cta} <Fragment set:html={arrow} /></a></div>
+		</div>
+	</section>
+
+	{p.launch && (
+		<section class="launch">
+			<div class="wrap">
+				<div class="launch-card reveal">
+					<div>
+						<span class="eyebrow">{p.launch.eyebrow}</span>
+						<h2>{p.launch.title}</h2>
+						<p>{p.launch.lead}</p>
+						<p>{p.launch.text}</p>
+						<p class="launch-price">{p.launch.price}</p>
+						<a href={p.launch.link.href} target="_blank" rel="noopener" class="btn btn-outline">{p.launch.link.label} <Fragment set:html={arrow} /></a>
+					</div>
+					<div>
+						<ul class="perks">
+							{p.launch.points.map((x) => (<li><Fragment set:html={tick} />{x}</li>))}
+						</ul>
+						<p>{p.launch.note}</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	)}
+
+	<section class="invest" id="invest">
+		<div class="wrap invest-inner">
+			<h2 class="invest-title reveal">{p.invest.title}</h2>
+			<p class="invest-lead reveal">{p.invest.lead}</p>
+			<div class:list={["istats", `istats--${p.invest.stats.length}`, "reveal"]}>
+				{p.invest.stats.map((s) => (<div class="istat"><strong>{s.value}</strong><span>{s.label}</span></div>))}
+			</div>
+			<div class="ipoints reveal">
+				{p.invest.paragraphs.map((x) => (<p>{x}</p>))}
+			</div>
+			<div class="payplan reveal" style="margin-top:56px">
+				<h3>{p.invest.heading}</h3>
+				<div class="pay-steps">
+					{p.invest.timeline.map((t) => (<div><strong>{t.when}</strong><span>{t.what}</span></div>))}
+				</div>
+			</div>
+			<div class="pfeature-grid">
+				{p.invest.features.map((f) => (
+					<div class="pfeature reveal"><h3>{f.title}</h3><span class="kicker">{f.kicker}</span><p>{f.text}</p></div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="units">
+		<div class="wrap">
+			<div class="section-head center reveal">
+				<span class="eyebrow">{p.units.eyebrow}</span>
+				<h2>{p.units.heading}</h2>
+				<p>{p.units.lead}</p>
+			</div>
+			<div class="units units--static active">
+				{p.units.cards.map((u) => (
+					<div class:list={["unit", "reveal", { popular: u.popular }]}>
+						{u.popular && <span class="badge">Most Popular</span>}
+						<h3>{u.name}</h3>
+						<p class="size">{u.size}</p>
+						<span class="from">From</span>
+						<div class="price">{u.price}</div>
+						{u.kicker && <span class="kicker">{u.kicker}</span>}
+						{u.note && <p class="note">{u.note}</p>}
+						{u.tour && <a href={u.tour} target="_blank" rel="noopener">3D Virtual Tour <Fragment set:html={arrow} /></a>}
+					</div>
+				))}
+			</div>
+			<div class="payplan reveal">
+				<h3>{p.units.payment.title}<small>{p.units.payment.sub}</small></h3>
+				{p.units.payment.steps ? (
+					<div class="pay-steps">
+						{p.units.payment.steps.map((s) => (<div><strong>{s.value}</strong><span>{s.label}</span></div>))}
+					</div>
+				) : (
+					<div>
+						<p style="color:var(--muted);margin-bottom:20px">{p.units.payment.text}</p>
+						{p.units.payment.cta && <a href="#contact" class="btn btn-outline">{p.units.payment.cta} <Fragment set:html={arrow} /></a>}
+					</div>
+				)}
+			</div>
+		</div>
+	</section>
+
+	<section class="lifestyle" id="facilities">
+		<div class="wrap">
+			<div class="section-head center reveal">
+				<span class="eyebrow">{p.facilities.eyebrow}</span>
+				<h2>{p.facilities.heading}</h2>
+				<p>{p.facilities.lead}</p>
+			</div>
+			<div class="pfeature-grid">
+				{p.facilities.cards.map((c) => (
+					<div class="pfeature reveal">{c.badge && <span class="pbadge">{c.badge}</span>}<h3>{c.title}</h3><p>{c.text}</p></div>
+				))}
+			</div>
+			<div class="amenities">
+				{p.facilities.chips.map((c) => (<div class="amenity"><Fragment set:html={tick} />{c}</div>))}
+			</div>
+		</div>
+	</section>
+
+	{p.concept && (
+		<section id="concept">
+			<div class="wrap">
+				<div class="section-head center reveal">
+					<span class="eyebrow">{p.concept.eyebrow}</span>
+					<h2>{p.concept.heading}</h2>
+					<p>{p.concept.text}</p>
+				</div>
+				<div class="dev-facts" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+					{p.concept.stats.map((s) => (<div class="istat reveal"><strong>{s.value}</strong><span>{s.label}</span><p>{s.text}</p></div>))}
+				</div>
+				<div class="amenities">
+					{p.concept.chips.map((c) => (<div class="amenity"><Fragment set:html={tick} />{c}</div>))}
+				</div>
+			</div>
+		</section>
+	)}
+
+	<section class:list={[{ lifestyle: !!p.concept }]} id="gallery">
+		<div class="wrap">
+			<div class="section-head center reveal">
+				<span class="eyebrow">{p.gallery.eyebrow}</span>
+				<h2>{p.gallery.heading}</h2>
+			</div>
+			<p class="gallery-note">{p.gallery.note}</p>
+			<div class="gallery">
+				{p.gallery.images.map((g, i) => (
+					<figure class={wide(i)}>
+						<button type="button" data-full={g.src} data-alt={g.alt} aria-label={`Enlarge: ${g.alt}`}>
+							<img src={g.src} alt={g.alt} loading="lazy" decoding="async" />
+						</button>
+						<figcaption>{g.alt}</figcaption>
+					</figure>
+				))}
+			</div>
+		</div>
+	</section>
+	<dialog class="lightbox" id="lightbox" aria-label="Gallery image">
+		<img src="" alt="" />
+		<div class="lightbox-bar">
+			<span data-caption></span>
+			<div>
+				<button type="button" data-prev aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7" /></svg></button>
+				<button type="button" data-next aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7" /></svg></button>
+				<button type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+			</div>
+		</div>
+	</dialog>
+
+	<section class:list={[{ lifestyle: !p.concept }]} id="location">
+		<div class="wrap">
+			<div class="section-head center reveal">
+				<span class="eyebrow">{p.location.eyebrow}</span>
+				<h2>{p.location.heading}</h2>
+				<p>{p.location.lead}</p>
+			</div>
+			<div class:list={[{ "location-grid": !!p.location.image }]}>
+				{p.location.image && <div class="location-figure reveal"><img src={p.location.image} alt={p.location.heading} loading="lazy" decoding="async" /></div>}
+				<div class="amenities">
+					{p.location.places.map((x) => (<div class="amenity place"><span>{x.name}</span><strong>{x.distance}</strong></div>))}
+				</div>
+			</div>
+			{p.location.highlights && (
+				<div class="amenities" style={`grid-template-columns:repeat(${p.location.highlights.length},minmax(0,1fr))`}>
+					{p.location.highlights.map((x) => (<div class="amenity"><Fragment set:html={tick} />{x}</div>))}
+				</div>
+			)}
+		</div>
+	</section>
+
+	<section class="green green--limo">
+		<div class="wrap">
+			<div class="green-copy reveal">
+				<h2 class="green-title">{p.limousine.title}</h2>
+				<p>{p.limousine.text}</p>
+				<a href={p.limousine.href} target="_blank" rel="noopener" class="btn-explore">{p.limousine.cta} <svg viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 10h31M24 2l8 8-8 8" /></svg></a>
+			</div>
+		</div>
+	</section>
+
+	{p.reviews && (
+		<section class="testis testis--static" id="reviews" aria-labelledby="reviewsTitle">
+			<div class="wrap">
+				<div class="testis-head reveal">
+					<h2 id="reviewsTitle">{p.reviews.eyebrow}</h2>
+					<p>{p.reviews.heading}</p>
+				</div>
+				<div class="tslider reveal">
+					<div class="ttrack">
+						{p.reviews.items.map((r) => (
+							<article class="tcard">
+								<Fragment set:html={quote} />
+								<p class="tcard-text">{r.text}</p>
+								<footer class="tcard-author"><span class="tcard-avatar" aria-hidden="true">{r.initial}</span><span><strong>{r.name}</strong><small>{r.source}</small></span></footer>
+							</article>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+	)}
+
+	<section id="developer">
+		<div class="wrap">
+			<div class="section-head center reveal">
+				<span class="eyebrow">{p.developer.eyebrow}</span>
+				<h2>{p.developer.heading}</h2>
+				<p>{p.developer.lead}</p>
+			</div>
+			<div class="dev-facts">
+				{p.developer.stats.map((s) => (<div class="istat reveal"><strong>{s.value}</strong><span>{s.label}</span><p>{s.text}</p></div>))}
+			</div>
+			{p.flagship && (
+				<div class="flagship reveal">
+					<span class="eyebrow">{p.flagship.sub}</span>
+					<h3>{p.flagship.heading}</h3>
+					<p>{p.flagship.text}</p>
+					<div class="pay-steps">
+						{p.flagship.stats.map((s) => (<div><strong>{s.value}</strong><span>{s.label}</span></div>))}
+					</div>
+				</div>
+			)}
+			{p.status && (<div class="status-line reveal"><h3>{p.status.heading}</h3><p>{p.status.text}</p></div>)}
+		</div>
+	</section>
+
+	<section class="lifestyle" id="faq">
+		<div class="wrap faq-grid">
+			<div class="faq-side reveal">
+				<span class="eyebrow">{p.faq.eyebrow}</span>
+				<div class="section-head" style="margin-bottom:0"><h2>{p.faq.heading}</h2></div>
+			</div>
+			<div class="reveal">
+				{p.faq.items.map((i, n) => (<details open={n === 0}><summary>{i.q}</summary><p>{i.a}</p></details>))}
+			</div>
+		</div>
+	</section>
+
+	<section class="contact" id="contact">
+		<div class="wrap contact-grid">
+			<div class="contact-copy reveal">
+				<span class="eyebrow">{p.contact.eyebrow}</span>
+				<h2>{p.contact.heading}</h2>
+				<p>{p.contact.text}</p>
+				<div class="direct">
+					<a href="https://wa.me/66956516795" target="_blank" rel="noopener" class="btn btn-gold">WhatsApp Us</a>
+					<a href="tel:+66956516795" class="btn btn-ghost">+66 95 651 6795</a>
+				</div>
+			</div>
+			<div class="form-card reveal">
+				<form data-lead-form={p.formId} data-project={p.formProject} novalidate>
+					<p class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off" /></label></p>
+					<h3>{p.contact.formTitle}</h3>
+					<p>{p.contact.formSub}</p>
+					<div class="field">
+						<label for="goal">Investment Goal</label>
+						<select id="goal" name="goal">
+							<option>Investment</option>
+							<option>Holiday Home</option>
+							<option>Permanent Residence</option>
+						</select>
+					</div>
+					<div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name" /></div>
+					<div class="row2">
+						<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+						<div class="field"><label for="phone">WhatsApp Number</label><input id="phone" name="phone" type="tel" required autocomplete="tel" /></div>
+					</div>
+					<div class="field">
+						<label>Are you an agent?</label>
+						<div class="chips">
+							<input type="radio" name="is_agent" id="agentNo" value="No" checked /><label for="agentNo">No</label>
+							<input type="radio" name="is_agent" id="agentYes" value="Yes" /><label for="agentYes">Yes</label>
+						</div>
+					</div>
+					<p class="form-error" role="alert" hidden>Sorry, your enquiry couldn’t be sent. Please try again, or message us on WhatsApp at +66 95 651 6795.</p>
+					<button type="submit" class="btn btn-bronze">{p.contact.button} <Fragment set:html={arrow} /></button>
+					<p class="form-note">{p.contact.note}</p>
+				</form>
+				<div class="form-success" role="status">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10" /><path d="m7 12 3.5 3.5L17 9" /></svg>
+					<h3>Thank you</h3>
+					<p style="color:var(--muted);margin-top:8px">Our team will send your brochure within 24 hours.<br />Prefer to chat now? <a href="https://wa.me/66956516795" style="color:var(--bronze);text-decoration:underline" target="_blank" rel="noopener">WhatsApp us</a>.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Site>

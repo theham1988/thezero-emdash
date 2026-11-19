@@ -77,6 +77,19 @@ export const FORMS: Record<string, FormConfig> = {
 		tags: ["Website", "Homepage"],
 		honeypot: "company",
 	},
+	// Project pages
+	website_bangtao: {
+		formName: "The Zero Phuket - Website Bang Tao Page",
+		tags: ["Website", "Bang Tao Page"],
+		project: "bangtao",
+		honeypot: "company",
+	},
+	website_naiyang: {
+		formName: "The Zero Phuket - Website Silhouette Nai Yang Page",
+		tags: ["Website", "Nai Yang Page"],
+		project: "naiyang",
+		honeypot: "company",
+	},
 };
 
 /** Search engines whose referrals count as organic search ("SEO"). */
