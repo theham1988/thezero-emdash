@@ -89,6 +89,17 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 		</main>
 		<Fragment set:html={footerHtml} />
 		<script is:inline set:html={pageScript ?? sharedScript} />
+		<script is:inline>
+			// Phone menu: the button opens the full list of pages; choosing a page or pressing Escape closes it.
+			(() => {
+				const nav = document.getElementById("nav"), btn = document.getElementById("menuToggle");
+				if (!nav || !btn) return;
+				const set = open => { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); document.documentElement.classList.toggle("menu-open", open); };
+				btn.addEventListener("click", () => set(!nav.classList.contains("open")));
+				document.getElementById("menus").addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+				document.addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
+			})();
+		</script>
 		<div id="google_translate_element" hidden></div>
 		<script is:inline src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 		<EmDashBodyEnd page={pageCtx} />

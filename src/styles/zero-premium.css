@@ -80,6 +80,34 @@ h1,h2,h3,.display{letter-spacing:-.005em}
 .nav.scrolled .btn-gold{background:var(--bronze);color:#fff}
 .nav.scrolled .btn-gold:hover{background:var(--ink)}
 
+/* phone menu: a button that opens the full list of pages */
+.menu-toggle{display:none;width:44px;height:44px;flex-shrink:0;padding:0;border:1px solid rgba(255,255,255,.5);border-radius:2px;background:transparent;color:#fff;cursor:pointer;place-content:center;gap:5px}
+.menu-toggle span{display:block;width:20px;height:1.5px;background:currentColor;transition:transform .25s ease,opacity .2s ease}
+.nav.scrolled .menu-toggle,.nav.open .menu-toggle{color:var(--ink);border-color:var(--ink)}
+.nav.open .menu-toggle span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav.open .menu-toggle span:nth-child(2){opacity:0}
+.nav.open .menu-toggle span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.project-body h3 a:hover{color:var(--bronze)}
+.project-img a{display:block;width:100%;height:100%}
+.intro-foot{gap:14px;flex-wrap:wrap}
+@media (max-width:980px){
+  .menu-toggle{display:grid}
+  .bar{position:relative}
+  .nav .soc,.nav .bar-cta{display:none}
+  .bar .wrap{grid-template-columns:auto 1fr}
+  .bar-actions{justify-content:flex-end;gap:10px}
+  .menus{position:absolute;top:100%;left:0;right:0;height:calc(100dvh - var(--bar-h));display:block;overflow-y:auto;padding:12px 20px 120px;background:var(--paper);-webkit-mask-image:none;mask-image:none;visibility:hidden;opacity:0;transition:opacity .2s ease,visibility .2s}
+  .nav.open .menus{visibility:visible;opacity:1}
+  .nav.open .bar{background:var(--paper);border-bottom-color:var(--line)}
+  .nav.open .bar .logo img{filter:none}
+  .nav.open .lang-btn{color:var(--ink);border-color:rgba(133,108,78,.35)}
+  .menu,.nav.scrolled .menu{flex-direction:column;align-items:stretch;gap:0;font-size:1.6rem;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink);text-shadow:none}
+  .menu a{padding:20px 0;border-bottom:1px solid var(--line);white-space:normal}
+  .menu a::after{display:none}
+  .menu a.active,.nav.scrolled .menu a.active{color:var(--bronze)}
+  html.menu-open{overflow:hidden}
+}
+
 /* ---------- Home hero ---------- */
 .hero{height:auto;min-height:max(100svh,760px);max-height:none;padding:calc(var(--bar-h) + 48px) 0 104px;align-items:center}
 .hero::after{background:linear-gradient(90deg,rgba(20,17,13,.78) 0%,rgba(20,17,13,.45) 46%,rgba(20,17,13,.2) 100%),linear-gradient(0deg,rgba(20,17,13,.55) 0%,rgba(20,17,13,0) 34%)}
