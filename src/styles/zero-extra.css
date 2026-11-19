@@ -78,6 +78,10 @@ a.mtab{display:inline-flex;align-items:center}
 .location-figure{border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
 .location-figure img{width:100%;height:100%;object-fit:cover}
 .green--limo{min-height:420px}
+.green.green--limo::before{background:radial-gradient(120% 140% at 50% 0%,#2A251F 0%,var(--ink) 60%)}
+.green.green--limo::after{background:none}
+#gallery .gallery{grid-auto-flow:dense}
+.page-hero--project .eyebrow{flex-wrap:wrap;row-gap:6px}
 .green--limo .green-title{font-size:clamp(1.7rem,3.2vw,2.8rem)}
 .testis--static .ttrack{flex-wrap:nowrap}
 .testis--static .tcard{min-height:300px}
@@ -95,4 +99,4 @@ a.mtab{display:inline-flex;align-items:center}
 .status-line p{color:var(--bronze);font-family:"Josefin Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem}
 @media (max-width:1080px){.invest .pfeature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.istats--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){.launch-card,.location-grid{grid-template-columns:minmax(0,1fr)}.dev-facts{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:600px){.invest .pfeature-grid,.istats--3,.location-grid .amenities{grid-template-columns:minmax(0,1fr)}.gallery-note{margin-top:-24px}}
+@media (max-width:600px){.page-hero--project .eyebrow::before,.page-hero--project .eyebrow::after{display:none}.page-hero--project .eyebrow{letter-spacing:.2em}.invest-lead{margin-top:0}.invest .pfeature-grid,.istats--3,.location-grid .amenities{grid-template-columns:minmax(0,1fr)}.gallery-note{margin-top:-24px}}

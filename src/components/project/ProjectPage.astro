@@ -21,7 +21,12 @@ const faqSchema = {
 	"@type": "FAQPage",
 	mainEntity: p.faq.items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
 };
-const wide = (i: number) => (i % 7 === 0 ? "g-wide g-tall" : i % 7 === 4 ? "g-wide" : "");
+// Gallery layout on a 4-column grid: the first photo is large (2x2); as many others as needed are
+// made wide so the last row always ends full, whatever the number of photos.
+const galleryCount = p.gallery.images.length;
+const extraWide = (4 - ((galleryCount + 3) % 4)) % 4;
+const wideAt = [5, 9, 13].slice(0, extraWide);
+const wide = (i: number) => (i === 0 ? "g-wide g-tall" : wideAt.includes(i) ? "g-wide" : "");
 ---
 
 <Site title={p.metaTitle} description={p.hero.lead} canonical={canonical} image={`${Astro.url.origin}${p.hero.image}`} pageScript={sharedScript + leadFormScript} recaptcha>
