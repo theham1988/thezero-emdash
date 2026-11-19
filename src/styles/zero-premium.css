@@ -484,6 +484,9 @@ details p{font-size:1.05rem;padding-bottom:28px;max-width:62ch}
 .ab-giving-grid > div + div{padding-top:22px;border-top:1px solid var(--ink)}
 .ab-link{color:var(--bronze);border-bottom:1px solid currentColor}
 .ab-own{background:var(--espresso);color:rgba(255,255,255,.82)}
+.ab-own .section-head h2{color:#fff}
+.ab-own p{max-width:62ch}
+.ab-own-cta{margin-top:32px}
 .ab-own h2,.ab-own h3{color:#fff}
 .ab-own .eyebrow{color:var(--gold)}
 .ab-own-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,104px);align-items:start}
