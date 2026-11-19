@@ -78,6 +78,7 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 			rel="stylesheet"
 		/>
 		{recaptcha && <script is:inline src={`https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_KEY}`} async defer />}
+		{recaptcha && <script is:inline src="/js/zp-phone.js" defer />}
 	</head>
 	<body>
 		<Fragment set:html={trackingBody} />

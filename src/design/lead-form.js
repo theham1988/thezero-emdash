@@ -13,7 +13,9 @@
       const bad = [...f.querySelectorAll('[required]')].filter(i => !i.checkValidity());
       f.querySelectorAll('input,select').forEach(i => i.style.borderColor = '');
       error.hidden = true;
+      const ph = window.zpPhone ? window.zpPhone.check(f) : null; // country code + number, checked for length
       if (bad.length) { bad.forEach(i => i.style.borderColor = '#c0392b'); bad[0].focus(); return; }
+      if (ph && !ph.ok) return;
       submit.disabled = true;
       try {
         let token = '';
@@ -21,7 +23,7 @@
         const val = n => (f.elements[n] && f.elements[n].value) || '';
         const payload = {
           form_id: f.dataset.leadForm,
-          name: val('name'), email: val('email'), phone: val('phone'),
+          name: val('name'), email: val('email'), phone: ph ? ph.full : val('phone'),
           project: f.dataset.project || val('project'),
           goal: val('goal'),
           is_agent: (f.querySelector('input[name="is_agent"]:checked') || {}).value || 'No',

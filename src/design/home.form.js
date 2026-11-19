@@ -12,7 +12,9 @@
     const bad = [...f.querySelectorAll('[required]')].filter(i => !i.checkValidity());
     f.querySelectorAll('input').forEach(i => i.style.borderColor = '');
     error.hidden = true;
+    const ph = window.zpPhone ? window.zpPhone.check(f) : null; // country code + number, checked for length
     if (bad.length) { bad.forEach(i => i.style.borderColor = '#c0392b'); bad[0].focus(); return; }
+    if (ph && !ph.ok) return;
     submit.disabled = true;
     try {
       let recaptchaToken = '';
@@ -20,7 +22,7 @@
       catch (rcErr) { console.warn('reCAPTCHA failed', rcErr); }
       const payload = {
         form_id: 'website_home',
-        name: f.elements.name.value, email: f.elements.email.value, phone: f.elements.phone.value,
+        name: f.elements.name.value, email: f.elements.email.value, phone: ph ? ph.full : f.elements.phone.value,
         project: f.elements.project ? f.elements.project.value : '',
         goal: (f.querySelector('input[name="goal"]:checked') || {}).value || '',
         company: f.elements.company.value,
