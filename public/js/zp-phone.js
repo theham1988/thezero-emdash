@@ -45,10 +45,10 @@
       const rows = COUNTRIES.filter(match);
       f.list.innerHTML = html + (rows.length ? rows.map(item).join('') : '<div class="cc-empty">No country found</div>');
     };
-    const close = () => { f.dd.classList.remove('open'); f.btn.setAttribute('aria-expanded', 'false'); };
+    const close = () => { f.dd.classList.remove('open'); f.btn.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('cc-open'); };
     const open = () => {
       fields.forEach(o => o.dd.classList.remove('open'));
-      render(''); f.search.value = ''; f.dd.classList.add('open'); f.btn.setAttribute('aria-expanded', 'true');
+      render(''); f.search.value = ''; f.dd.classList.add('open'); document.documentElement.classList.add('cc-open'); f.btn.setAttribute('aria-expanded', 'true');
       if (window.innerWidth > 600) f.search.focus();
       const sel = f.list.querySelector('.cc-item.selected'); if (sel) sel.scrollIntoView({block: 'nearest'});
     };
