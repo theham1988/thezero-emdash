@@ -56,6 +56,42 @@
     });
   }), {rootMargin: '-45% 0px -50% 0px'});
   ['top', 'about', 'projects', 'lifestyle', 'contact'].forEach(id => spyIO.observe(document.getElementById(id)));
+
+  // Menu and button links to a section: scroll there, then check the landing spot once the
+  // page has settled (photos and fonts loading mid-scroll can move the section) and correct it.
+  const goTo = (el, smooth) => {
+    const target = () => el.getBoundingClientRect().top + window.scrollY - (el.id === 'top' ? 0 : nav.offsetHeight);
+    let cancelled = false, last = -1, still = 0, checks = 0;
+    const stop = () => { cancelled = true; };
+    ['wheel', 'touchstart', 'keydown'].forEach(t => window.addEventListener(t, stop, {passive: true, once: true}));
+    window.scrollTo({top: target(), behavior: smooth ? 'smooth' : 'instant'});
+    const settle = () => {
+      if (cancelled || ++checks > 40) return;
+      still = window.scrollY === last ? still + 1 : 0;
+      last = window.scrollY;
+      if (still >= 2) {
+        if (Math.abs(target() - window.scrollY) > 4) { window.scrollTo({top: target(), behavior: 'instant'}); still = 0; }
+        else if (still >= 6) return;
+      }
+      setTimeout(settle, 150);
+    };
+    setTimeout(settle, 300);
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"], a[href^="/#"]');
+    if (!a) return;
+    const id = a.getAttribute('href').split('#')[1];
+    const el = id && document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    history.pushState(null, '', '#' + id);
+    goTo(el, !matchMedia('(prefers-reduced-motion: reduce)').matches);
+  });
+  // Arriving from another page with a section in the address (e.g. /#contact)
+  if (location.hash.length > 1) {
+    const el = document.getElementById(location.hash.slice(1));
+    if (el) { goTo(el, false); window.addEventListener('load', () => goTo(el, false)); }
+  }
   
   // Hero slider
   const slides = [...document.querySelectorAll('.slide')];
