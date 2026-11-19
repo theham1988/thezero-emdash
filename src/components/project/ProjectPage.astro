@@ -62,7 +62,7 @@ const wide = (i: number) => (i === 0 ? "g-wide g-tall" : wideAt.includes(i) ? "g
 						<p>{p.launch.lead}</p>
 						<p>{p.launch.text}</p>
 						<p class="launch-price">{p.launch.price}</p>
-						<a href={p.launch.link.href} target="_blank" rel="noopener" class="btn btn-outline">{p.launch.link.label} <Fragment set:html={arrow} /></a>
+						<a href={p.launch.link.href} class="btn btn-outline">{p.launch.link.label} <Fragment set:html={arrow} /></a>
 					</div>
 					<div>
 						<ul class="perks">

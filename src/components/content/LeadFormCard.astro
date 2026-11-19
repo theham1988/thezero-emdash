@@ -1,0 +1,72 @@
+---
+/**
+ * The site's enquiry form card. Posts to the lead gateway through
+ * src/design/lead-form.js (the page must load that script and reCAPTCHA).
+ */
+interface Props {
+	formId: string;
+	project?: string;
+	title: string;
+	sub?: string;
+	button: string;
+	note?: string;
+	/** Show the "Investment Goal" question (sales forms). */
+	goal?: boolean;
+	/** Show the "Are you an agent?" question. */
+	agent?: boolean;
+	/** Show a project choice (forms not tied to one project). */
+	projectChoice?: boolean;
+}
+const { formId, project, title, sub, button, note, goal = false, agent = false, projectChoice = false } = Astro.props;
+const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+---
+
+<div class="form-card reveal">
+	<form data-lead-form={formId} data-project={project} novalidate>
+		<p class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off" /></label></p>
+		<h3>{title}</h3>
+		{sub && <p>{sub}</p>}
+		{projectChoice && (
+			<div class="field">
+				<label for="lf-project">Project of interest</label>
+				<select id="lf-project" name="project">
+					<option>Silhouette by The Zero</option>
+					<option>The Zero Bang Tao</option>
+					<option>Both / not sure yet</option>
+				</select>
+			</div>
+		)}
+		{goal && (
+			<div class="field">
+				<label for="lf-goal">Investment Goal</label>
+				<select id="lf-goal" name="goal">
+					<option>Investment</option>
+					<option>Holiday Home</option>
+					<option>Permanent Residence</option>
+				</select>
+			</div>
+		)}
+		<div class="field"><label for="lf-name">Name</label><input id="lf-name" name="name" required autocomplete="name" /></div>
+		<div class="row2">
+			<div class="field"><label for="lf-email">Email</label><input id="lf-email" name="email" type="email" required autocomplete="email" /></div>
+			<div class="field"><label for="lf-phone">WhatsApp Number</label><input id="lf-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+		</div>
+		{agent && (
+			<div class="field">
+				<label>Are you an agent?</label>
+				<div class="chips">
+					<input type="radio" name="is_agent" id="lf-agent-no" value="No" checked /><label for="lf-agent-no">No</label>
+					<input type="radio" name="is_agent" id="lf-agent-yes" value="Yes" /><label for="lf-agent-yes">Yes</label>
+				</div>
+			</div>
+		)}
+		<p class="form-error" role="alert" hidden>Sorry, your enquiry couldn’t be sent. Please try again, or message us on WhatsApp at +66 95 651 6795.</p>
+		<button type="submit" class="btn btn-bronze">{button} <Fragment set:html={arrow} /></button>
+		{note && <p class="form-note">{note}</p>}
+	</form>
+	<div class="form-success" role="status">
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10" /><path d="m7 12 3.5 3.5L17 9" /></svg>
+		<h3>Thank you</h3>
+		<p style="color:var(--muted);margin-top:8px">Our team will reply within 24 hours.<br />Prefer to chat now? <a href="https://wa.me/66956516795" style="color:var(--bronze);text-decoration:underline" target="_blank" rel="noopener">WhatsApp us</a>.</p>
+	</div>
+</div>

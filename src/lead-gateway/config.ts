@@ -84,6 +84,23 @@ export const FORMS: Record<string, FormConfig> = {
 		project: "bangtao",
 		honeypot: "company",
 	},
+	website_earth: {
+		formName: "The Zero Phuket - Website Earth Residences Page",
+		tags: ["Website", "Earth Residences Page"],
+		project: "naiyang",
+		honeypot: "company",
+	},
+	website_rentals_bangtao: {
+		formName: "The Zero Phuket - Website Rentals Waitlist (Bang Tao)",
+		tags: ["Website", "Rentals Waitlist"],
+		project: "bangtao",
+		honeypot: "company",
+	},
+	website_contact: {
+		formName: "The Zero Phuket - Website Contact Page",
+		tags: ["Website", "Contact Page"],
+		honeypot: "company",
+	},
 	website_naiyang: {
 		formName: "The Zero Phuket - Website Silhouette Nai Yang Page",
 		tags: ["Website", "Nai Yang Page"],

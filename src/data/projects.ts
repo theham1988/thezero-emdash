@@ -252,7 +252,7 @@ export const silhouette: ProjectData = {
 			"Fully Managed Investment",
 		],
 		note: "Receive the current price list, floor plans, availability, and investor pack.",
-		link: { label: "Know More", href: "https://www.thezerophuket.com/silhouette-nai-yang/earth-residences/" },
+		link: { label: "Know More", href: "/silhouette-nai-yang/earth-residences" },
 	},
 	invest: {
 		title: "Investment Model",

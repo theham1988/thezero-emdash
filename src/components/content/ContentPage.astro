@@ -1,0 +1,127 @@
+---
+/**
+ * A page rebuilt from the old site's content (src/data/pages.json) in the
+ * site design: banner, then one section per heading with text, lists, facts,
+ * tables, photos, FAQ and buttons, and an enquiry form where the old page had one.
+ */
+import pages from "../../data/pages.json";
+import leadFormScript from "../../design/lead-form.js?raw";
+import sharedScript from "../../design/shared.js?raw";
+import Site from "../../layouts/Site.astro";
+import LeadFormCard from "./LeadFormCard.astro";
+
+interface Props {
+	slug: string;
+}
+const { slug } = Astro.props;
+const page = (pages as Record<string, any>)[slug];
+const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>`;
+
+const FORMS: Record<string, any> = {
+	website_contact: { eyebrow: "Get in Touch", heading: "Contact Us", title: "Contact Us", button: "Send", projectChoice: true, note: "No obligation · Response within 24 hours" },
+	website_earth: { eyebrow: "Off-Plan — Early Access Pricing", heading: "Secure Your Unit at Off-Plan Prices", text: "Full floor plans, investment brochure & price list. Response within 24 hours.", title: "Get Exclusive Pricing", sub: "Full price list, floor plans, and investment guide — free.", button: "Get Free Brochure & Pricing", note: "No obligation · Response within 24 hours", goal: true, agent: true, project: "Silhouette by The Zero" },
+	website_rentals_bangtao: { eyebrow: "Rentals", heading: "Join The Waitlist", title: "Join The Waitlist", button: "Join The Waitlist", project: "The Zero Bang Tao" },
+};
+const form = page.form ? FORMS[page.form] : null;
+const faqItems = page.sections.flatMap((s: any) => s.items.filter((b: any) => b.t === "faq").flatMap((b: any) => b.items));
+const faqSchema = faqItems.length
+	? { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map((i: any) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a.join(" ") } })) }
+	: null;
+const galleryOnly = (s: any) => s.items.length === 1 && s.items[0].t === "images";
+const hasGallery = page.sections.some((s: any) => s.items.some((b: any) => b.t === "images" && b.images.length > 1));
+const pageScript = sharedScript + (form || hasGallery ? leadFormScript : "");
+---
+
+<Site title={page.title} description={page.description || undefined} canonical={`${Astro.url.origin}/${page.slug}`} image={page.hero ? `${Astro.url.origin}${page.hero}` : undefined} pageScript={pageScript} recaptcha={!!form}>
+	{page.lang === "th" && <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" />}
+	{faqSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />}
+
+	<section class:list={["page-hero", { "page-hero--project": !!page.hero }]} id="top" style={page.hero ? `--hero:url(${page.hero})` : undefined} lang={page.lang || undefined}>
+		<div class="wrap">
+			<h1>{page.title}</h1>
+		</div>
+	</section>
+
+	<div class:list={["content-page", { "content-page--prose": page.prose }]} lang={page.lang || undefined}>
+		{page.sections.map((s: any, n: number) => (
+			<section class:list={[{ lifestyle: n % 2 === 1 }]}>
+				<div class="wrap">
+					{s.heading && (
+						<div class:list={["section-head", "reveal", { center: !page.prose }]}><h2>{s.heading}</h2></div>
+					)}
+					<div class:list={["content-flow", { "content-flow--wide": galleryOnly(s) }]}>
+						{s.items.map((b: any) => {
+							if (b.t === "p") return <p>{b.x}</p>;
+							if (b.t === "h3") return <h3>{b.x}</h3>;
+							if (b.t === "h4") return <h4>{b.x}</h4>;
+							if (b.t === "blockquote") return <blockquote>{b.x}</blockquote>;
+							if (b.t === "list") return <ul class="content-list">{b.items.map((x: string) => (<li>{x}</li>))}</ul>;
+							if (b.t === "chips") return <div class="amenities content-chips">{b.items.map((x: string) => (<div class="amenity"><Fragment set:html={tick} />{x}</div>))}</div>;
+							if (b.t === "facts") return <dl class="content-facts">{b.rows.map((r: string[]) => (<div><dt>{r[0]}</dt><dd>{r[1]}</dd></div>))}</dl>;
+							if (b.t === "table") return (
+								<div class="content-table"><table>
+									{b.head.length > 0 && <thead><tr>{b.head.map((h: string) => (<th>{h}</th>))}</tr></thead>}
+									<tbody>{b.rows.map((r: string[]) => (<tr>{r.map((c) => (<td>{c}</td>))}</tr>))}</tbody>
+								</table></div>
+							);
+							if (b.t === "faq") return <div class="content-faq">{b.items.map((i: any) => (<details><summary>{i.q}</summary>{i.a.map((x: string) => (<p>{x}</p>))}</details>))}</div>;
+							if (b.t === "a") return <p class="content-action"><a href={b.href} class="btn btn-outline" target={b.ext ? "_blank" : undefined} rel={b.ext ? "noopener" : undefined}>{b.x} <Fragment set:html={arrow} /></a></p>;
+							if (b.t === "images" && b.images.length === 1) return (
+								<figure class="content-figure reveal"><img src={b.images[0].src} alt={b.images[0].alt} loading="lazy" decoding="async" onerror="this.closest('figure').remove()" /></figure>
+							);
+							if (b.t === "images") return (
+								<div class="gallery content-gallery">
+									{b.images.map((g: any) => (
+										<figure>
+											<button type="button" data-full={g.src} data-alt={g.alt} aria-label={g.alt ? `Enlarge: ${g.alt}` : "Enlarge photo"}>
+												<img src={g.src} alt={g.alt} loading="lazy" decoding="async" onerror="this.closest('figure').remove()" />
+											</button>
+											{g.alt && <figcaption>{g.alt}</figcaption>}
+										</figure>
+									))}
+								</div>
+							);
+							return null;
+						})}
+					</div>
+				</div>
+			</section>
+		))}
+	</div>
+
+	{hasGallery && (
+		<dialog class="lightbox" id="lightbox" aria-label="Photo">
+			<img src="" alt="" />
+			<div class="lightbox-bar">
+				<span data-caption></span>
+				<div>
+					<button type="button" data-prev aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7" /></svg></button>
+					<button type="button" data-next aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7" /></svg></button>
+					<button type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+				</div>
+			</div>
+		</dialog>
+	)}
+
+	{form && (
+		<section class="contact" id="contact">
+			<div class="wrap contact-grid">
+				<div class="contact-copy reveal">
+					<span class="eyebrow">{form.eyebrow}</span>
+					<h2>{form.heading}</h2>
+					{form.text && <p>{form.text}</p>}
+					<ul class="perks">
+						<li><Fragment set:html={tick} /><a href="tel:+66956516795">+66 95 651 6795</a></li>
+						<li><Fragment set:html={tick} /><a href="mailto:info@thezerophuket.com">info@thezerophuket.com</a></li>
+						<li><Fragment set:html={tick} />58/8 Lagoon Road, Cherngtalay, Thalang, Phuket</li>
+					</ul>
+					<div class="direct">
+						<a href="https://wa.me/66956516795" target="_blank" rel="noopener" class="btn btn-gold">WhatsApp Us</a>
+					</div>
+				</div>
+				<LeadFormCard formId={page.form} project={form.project} title={form.title} sub={form.sub} button={form.button} note={form.note} goal={form.goal} agent={form.agent} projectChoice={form.projectChoice} />
+			</div>
+		</section>
+	)}
+</Site>

@@ -100,3 +100,41 @@ a.mtab{display:inline-flex;align-items:center}
 @media (max-width:1080px){.invest .pfeature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.istats--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){.launch-card,.location-grid{grid-template-columns:minmax(0,1fr)}.dev-facts{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:600px){.page-hero--project .eyebrow::before,.page-hero--project .eyebrow::after{display:none}.page-hero--project .eyebrow{letter-spacing:.2em}.invest-lead{margin-top:0}.invest .pfeature-grid,.istats--3,.location-grid .amenities{grid-template-columns:minmax(0,1fr)}.gallery-note{margin-top:-24px}}
+
+/* Content pages rebuilt from the old site (About, Gallery, London, Rentals, PDPA...) */
+.content-page > section{padding:clamp(56px,7vw,96px) 0}
+.content-page .section-head{margin-bottom:36px}
+.content-page .section-head h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.content-flow{width:min(820px,100%);margin-inline:auto;font-size:1.02rem;line-height:1.8;color:var(--text)}
+.content-flow--wide{width:100%}
+.content-flow > * + *{margin-top:1.1em}
+.content-flow h3{margin-top:1.8em;font-size:1.45rem;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.content-flow h4{margin-top:1.5em;font-family:"Josefin Sans",sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+.content-flow p{color:var(--muted)}
+.content-flow blockquote{padding-left:22px;border-left:1px solid var(--gold);font-family:"Josefin Sans",sans-serif;font-weight:300;font-size:1.3rem;line-height:1.5;color:var(--ink)}
+.content-list{padding-left:1.3em;color:var(--muted)}
+.content-list li + li{margin-top:.4em}
+.content-list li::marker{color:var(--bronze)}
+.content-chips{margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.content-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;border-top:1px solid var(--line)}
+.content-facts div{padding:16px 0;border-bottom:1px solid var(--line)}
+.content-facts dt{font-family:"Josefin Sans",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze)}
+.content-facts dd{margin-top:4px;color:var(--ink)}
+.content-table{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+.content-table table{width:100%;border-collapse:collapse;font-size:.94rem}
+.content-table th{padding:14px 16px;text-align:left;font-family:"Josefin Sans",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);background:var(--cream)}
+.content-table td{padding:14px 16px;border-top:1px solid var(--line);color:var(--text);vertical-align:top}
+.content-figure{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.content-figure img{width:100%;height:auto;max-height:620px;object-fit:cover}
+.content-gallery{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:240px;margin-top:1.4em}
+.content-flow--wide .content-gallery{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;margin-top:0}
+.content-action{margin-top:1.6em}
+.content-faq details p{color:var(--muted)}
+.content-page--prose .content-flow{font-size:1rem}
+.content-page--prose .section-head{width:min(820px,100%);margin-inline:auto}
+.content-page--prose .section-head h2{text-transform:none;letter-spacing:.01em;font-size:clamp(1.4rem,2.6vw,1.9rem)}
+[lang="th"],[lang="th"] h1,[lang="th"] h2,[lang="th"] h3{font-family:"Noto Sans Thai",Inter,system-ui,sans-serif;letter-spacing:0}
+[lang="th"] h1{font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.5;text-transform:none}
+.contact-copy .perks a:hover{color:var(--gold)}
+@media (max-width:860px){.content-gallery,.content-flow--wide .content-gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}}
+@media (max-width:600px){.content-facts{grid-template-columns:minmax(0,1fr)}}

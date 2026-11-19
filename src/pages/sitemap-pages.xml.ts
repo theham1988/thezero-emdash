@@ -5,7 +5,12 @@ import type { APIRoute } from "astro";
  * /sitemap-posts.xml; /sitemap.xml links both. Add a path here when a new
  * fixed page is built. Landing pages for ads are left out on purpose.
  */
-const PAGES = ["/", "/bang-tao", "/silhouette-nai-yang", "/media", "/media/news", "/media/blogs", "/media/press", "/privileges"];
+const PAGES = [
+	"/", "/bang-tao", "/silhouette-nai-yang", "/silhouette-nai-yang/earth-residences", "/projects", "/london",
+	"/about-us", "/gallery", "/rentals", "/rentals/the-zero-bang-tao", "/privileges",
+	"/media", "/media/news", "/media/blogs", "/media/press",
+	"/condo-phuket-beachfront", "/contact", "/pdpa-privacy-notice-terms",
+];
 
 export const GET: APIRoute = ({ url }) => {
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
