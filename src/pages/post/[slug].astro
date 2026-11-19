@@ -28,7 +28,10 @@ try {
 const seo = getSeoMeta(post, {
 	siteUrl: Astro.url.origin,
 	path: `/${post.id}`,
-	defaultDescription: post.data.excerpt || firstParagraph(post.data.content) || undefined,
+	// Titles and descriptions imported from WordPress (Yoast) live in the post's own
+	// "seo_title" / "seo_description" fields; the SEO panel overrides them when filled.
+	defaultTitle: post.data.seo_title || undefined,
+	defaultDescription: post.data.seo_description || post.data.excerpt || firstParagraph(post.data.content) || undefined,
 	defaultOgImage: ogImage,
 });
 ---
