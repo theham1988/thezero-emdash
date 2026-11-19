@@ -26,7 +26,7 @@
         company: f.elements.company.value,
         recaptcha_token: recaptchaToken,
         lang_code: (document.cookie.match(/googtrans=\/en\/([^;]+)/) || [])[1] || 'en',
-        page_url: location.href, landing_page: attr('landing_page'),
+        page_url: location.href, landing_page: attr('landing_page'), referrer: attr('referrer'),
         utm_source: attr('utm_source'), utm_medium: attr('utm_medium'), utm_campaign: attr('utm_campaign'),
         utm_content: attr('utm_content'), utm_term: attr('utm_term'),
         gclid: attr('gclid'), gbraid: attr('gbraid'), wbraid: attr('wbraid'), gad_source: attr('gad_source')

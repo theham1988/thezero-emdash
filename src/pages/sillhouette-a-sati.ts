@@ -1,4 +1,4 @@
-import page from "../landing/sillhouette-a-sati.html?raw";
-import { landingRoute } from "../landing/serve";
+import type { APIRoute } from "astro";
 
-export const GET = landingRoute(page);
+// This landing page was retired. Anything still pointing at it goes to /invest-sati, query string kept.
+export const GET: APIRoute = ({ url, redirect }) => redirect(`/invest-sati${url.search}`, 301);

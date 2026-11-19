@@ -70,23 +70,15 @@ export const PROJECT_ANSWERS: Record<string, ProjectKey> = {
 };
 
 export const FORMS: Record<string, FormConfig> = {
-	// SATI landing pages /sillhouette-a-sati and /sillhouette-b-sati
-	silhouette_a: {
-		formName: "The Zero Phuket - Silhouette Variant A (Investment)",
-		tags: ["SATI", "Google Ads", "Silhouette", "Variant A"],
-		project: "naiyang",
-		honeypot: "website",
-	},
-	silhouette_b: {
-		formName: "The Zero Phuket - Silhouette Variant B (Lifestyle)",
-		tags: ["SATI", "Google Ads", "Silhouette", "Variant B"],
-		project: "naiyang",
-		honeypot: "website",
-	},
-	// Home page contact form
+	// Home page contact form: organic ("SEO") and other non-landing-page leads.
+	// The gateway adds a channel tag (SEO, Direct, Referral, Social, Paid Search) from how the visitor arrived.
 	website_home: {
 		formName: "The Zero Phuket - Website Homepage",
 		tags: ["Website", "Homepage"],
 		honeypot: "company",
 	},
 };
+
+/** Search engines whose referrals count as organic search ("SEO"). */
+export const SEARCH_ENGINES = ["google.", "bing.com", "yandex.", "baidu.com", "duckduckgo.com", "yahoo.", "ecosia.org", "brave.com", "naver.com", "sogou.com"];
+export const SOCIAL_SITES = ["facebook.com", "instagram.com", "t.co", "twitter.com", "x.com", "linkedin.com", "youtube.com", "tiktok.com", "line.me", "vk.com", "t.me", "pinterest."];

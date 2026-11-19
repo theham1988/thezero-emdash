@@ -11,8 +11,28 @@ import Site from "../layouts/Site.astro";
 
 const description =
 	"Award-winning, EIA-approved sustainable condominiums in Bang Tao and Nai Yang, Phuket. Projected ~11% annual returns, 70/30 rental pool, freehold & leasehold. From THB 4.3M.";
+
+// Organisation details for search engines, carried over from the WordPress home page.
+const organization = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "The Zero Phuket",
+	url: "https://thezerophuket.com",
+	sameAs: [
+		"https://www.youtube.com/watch?v=F8a_DzxriU0",
+		"https://www.thailandinternationalboatshow.com/exhibitor/the-zero-bang-tao/",
+		"https://www.facebook.com/p/The-Zero-Bangtao-61558317737550/",
+		"https://www.instagram.com/thezerobangtao/",
+		"https://thezerophuket.com",
+		"https://www.fazwaz.com/projects/thailand/phuket/thalang/choeng-thale/the-zero-bang-tao",
+		"https://www.hipflat.com/projects/the-zero-bang-tao-tuncl832117eua1htla92tha104ehn7e",
+		"https://homeinphuket.com/development/the-zero-bangtao",
+		"https://kellerhenson.com/project/the-zero-bangtao/",
+	],
+};
 ---
 
 <Site description={description} canonical={`${Astro.url.origin}/`} headerHtml={headerHtml} pageScript={homeScript + formScript} recaptcha>
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(organization)} />
 	<Fragment set:html={mainHtml} />
 </Site>

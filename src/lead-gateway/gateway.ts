@@ -24,6 +24,8 @@ import {
 	PROJECTS,
 	RECAPTCHA,
 	RECAPTCHA_THRESHOLD,
+	SEARCH_ENGINES,
+	SOCIAL_SITES,
 	type ProjectKey,
 } from "./config";
 
@@ -103,12 +105,46 @@ async function writeLog(env: GatewayEnv, ref: string, status: string, body: Body
 		const ts = new Date().toISOString();
 		await env.LEADS.put(
 			`log:${ts}:${ref}`,
-			JSON.stringify({ ts, ref, status, form_id: body.form_id, email: body.email, phone: body.phone, campaign: body.utm_campaign, page_url: body.page_url, extra: extra ?? null }),
+			JSON.stringify({ ts, ref, status, channel: channelOf(body).channel, form_id: body.form_id, email: body.email, phone: body.phone, campaign: body.utm_campaign, page_url: body.page_url, extra: extra ?? null }),
 			{ expirationTtl: LOG_TTL_SEC },
 		);
 	} catch (e) {
 		console.error("lead log", String(e));
 	}
+}
+
+/**
+ * How the visitor arrived, from the attribution the form sends.
+ * Ad click ids or a paid medium win; then UTMs; then the referrer of the first page of the visit.
+ */
+export function channelOf(body: Body): { channel: string; source: string } {
+	const medium = (body.utm_medium || "").toLowerCase();
+	const utmSource = (body.utm_source || "").toLowerCase();
+	if (body.gclid || body.gbraid || body.wbraid || /^(cpc|ppc|paid|paidsearch)/.test(medium)) {
+		return { channel: "Paid Search", source: utmSource || "google" };
+	}
+	if (utmSource) {
+		if (medium === "organic") return { channel: "SEO", source: utmSource };
+		if (/social/.test(medium)) return { channel: "Social", source: utmSource };
+		if (/email/.test(medium)) return { channel: "Email", source: utmSource };
+		return { channel: "Campaign", source: utmSource };
+	}
+	let host = "";
+	try {
+		host = body.referrer ? new URL(body.referrer).hostname.replace(/^www\./, "").toLowerCase() : "";
+	} catch {
+		host = "";
+	}
+	let own = "";
+	try {
+		own = body.page_url ? new URL(body.page_url).hostname.replace(/^www\./, "").toLowerCase() : "";
+	} catch {
+		own = "";
+	}
+	if (!host || host === own) return { channel: "Direct", source: "direct" };
+	if (SEARCH_ENGINES.some((s) => host.includes(s))) return { channel: "SEO", source: host.split(".").find((p) => !["search", "m", "www"].includes(p)) || host };
+	if (SOCIAL_SITES.some((s) => host === s || host.endsWith(`.${s}`) || host.includes(s))) return { channel: "Social", source: host };
+	return { channel: "Referral", source: host };
 }
 
 /** The Kommo payload - the same shape /invest-sati sends to the Kwid webhook. */
@@ -118,14 +154,16 @@ function kommoPayload(body: Body, ref: string, recaptcha: { token: string; score
 	const project = PROJECTS[projectKey];
 	const langCode = body.lang_code || body.lang || "en";
 	const language = LANGUAGES[langCode] || "English";
-	const campaign = body.utm_campaign || "";
+	const { channel, source } = channelOf(body);
+	// Without a campaign UTM, the campaign field and tag carry the channel ("SEO", "Direct"...).
+	const campaign = body.utm_campaign || (channel === "Paid Search" || channel === "Campaign" ? "" : channel);
 	const f = KOMMO.fields;
 	return {
 		name: body.name.trim(),
 		email: body.email.trim(),
 		phone: fullPhone(body),
 		pipeline_id: KOMMO.pipelineId,
-		tags: [...form.tags, project.tag, language, campaign || "direct"].join(","),
+		tags: [...new Set([...form.tags, channel, project.tag, language, campaign || "direct"])].join(","),
 		recaptcha_token: recaptcha.token,
 		custom_fields: {
 			[f.property]: project.property,
@@ -133,7 +171,7 @@ function kommoPayload(body: Body, ref: string, recaptcha: { token: string; score
 			[f.goal]: body.investGoal || body.goal || "",
 			[f.variant]: body.form_id,
 			[f.utmCampaign]: campaign,
-			[f.utmSource]: body.utm_source || "",
+			[f.utmSource]: body.utm_source || source,
 			is_agent: body.is_agent || "No",
 			language,
 		},
@@ -141,6 +179,9 @@ function kommoPayload(body: Body, ref: string, recaptcha: { token: string; score
 			form_id: body.form_id,
 			form_name: form.formName,
 			lead_ref: ref,
+			channel,
+			source,
+			referrer: body.referrer || "",
 			project_preference: projectKey,
 			page_url: body.page_url || "",
 			landing_page: body.landing_page || "",
