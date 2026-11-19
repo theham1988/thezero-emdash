@@ -1,5 +1,382 @@
 ---
-import ContentPage from "../components/content/ContentPage.astro";
+/**
+ * About Us. Content follows the Company Profile 2026 (Buyers & Brokers):
+ * why we exist, the founders' story, leadership, what Zero means, build
+ * details, numbers, The Zero SW20, contractor, quality control, construction
+ * progress, the two projects, giving back and how to buy.
+ *
+ * The questions at the foot of the page (and their FAQ markup for search
+ * engines) are the ones the old About page already had, from src/data/pages.json.
+ * Edit the copy for the rest of the page here.
+ */
+import LeadFormCard from "../components/content/LeadFormCard.astro";
+import pages from "../data/pages.json";
+import leadFormScript from "../design/lead-form.js?raw";
+import sharedScript from "../design/shared.js?raw";
+import Site from "../layouts/Site.astro";
+
+const old = (pages as Record<string, any>)["about-us"];
+const faqItems: { q: string; a: string[] }[] = old.sections.flatMap((s: any) => s.items.filter((b: any) => b.t === "faq").flatMap((b: any) => b.items));
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqItems.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a.join(" ") } })),
+};
+const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>`;
+
+const leaders = [
+	{
+		name: "Robert Hodge",
+		role: "Founder, Director & Executive Chairman",
+		photo: "/wp-content/uploads/2025/10/Robert-Hodge-1.webp",
+		text: "Decades of sustainable development in the UK and Thailand. His London scheme, The Zero SW20, won the Energy Efficiency Award 2022 for Best London Development and sold out.",
+	},
+	{
+		name: "Wipapon Noonsimi",
+		role: "Director & Shareholder",
+		photo: "/wp-content/uploads/2026/05/Wipapon-Noonsimi.jpg",
+		text: "Led the complex land acquisitions for both projects and brings deep local relationships, a passion for sustainable living and the eye behind our interiors.",
+	},
+	{
+		name: "Vid Randelovic",
+		role: "Co-Founder & Chief Commercial Officer",
+		photo: "/wp-content/uploads/2025/10/Vid-Randelovic-1.webp",
+		text: "A technology and digital background, with projects for ECA Abu Dhabi, Club Wyndham and Karbon Invest. Led The Zero Bang Tao; heads commercial strategy and marketing.",
+	},
+	{
+		name: "Jeff Wazen",
+		role: "Sales & Operations Director",
+		photo: "/images/about/jeff-wazen.webp",
+		text: "Sales and project management across Lebanon, Cyprus and Thailand, leading projects including The Greens, Kata View and Progressive Property Phuket.",
+	},
+];
+
+const details = [
+	["Euro-profile windows", "Aluminium Euro-profile frames with heat-resistant glazing that keeps rooms cool."],
+	["Insulated walls", "Insulated wall systems that cut heat gain and running costs."],
+	["Fire-rated doors", "Bespoke fire-rated timber entrance doors and durable wood-composite doors inside."],
+	["Solar & rainwater", "Solar panels on the roof and rainwater harvesting across the building."],
+	["Lasting finishes", "5 mm herringbone flooring and 18 mm moisture-resistant kitchen boards."],
+	["Plastic-free & electric", "Phuket’s first single-use plastic-free condominium, with EV charging."],
+];
+
+const numbers = [
+	["25+", "years of UK development, over £120M in sales"],
+	["235", "residences across two Phuket projects"],
+	["85%", "of The Zero Bang Tao sold"],
+	["2/2", "projects with EIA approval and building permits"],
+];
 ---
 
-<ContentPage slug="about-us" />
+<Site title={old.title} description={old.description || undefined} canonical={`${Astro.url.origin}/about-us`} image={`${Astro.url.origin}/images/about/founders-on-the-water.webp`} pageScript={sharedScript + leadFormScript} recaptcha>
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+
+	<section class="page-hero page-hero--project" id="top" style="--hero:url(/wp-content/uploads/2025/11/The-Zero-Nai-Yang-Aerial-Beach-scaled.jpg)">
+		<div class="wrap">
+			<span class="eyebrow">About Us</span>
+			<h1>Homes worthy of the island we love.</h1>
+		</div>
+	</section>
+
+	<div class="about">
+		<section class="ab-why">
+			<div class="wrap ab-split">
+				<div class="reveal">
+					<span class="eyebrow">Why we exist</span>
+					<h2>Phuket deserves better buildings</h2>
+					<p class="ab-lead">Buying off-plan in Phuket often means trusting a brochure. Too many buildings age badly in the tropical climate, and take more from the island than they give back.</p>
+					<p>The Zero was created to do both better: boutique developments with attention to every detail and quality control at every stage, built to last and kind to the place we call home.</p>
+				</div>
+				<figure class="ab-figure ab-figure--tall reveal"><img src="/wp-content/uploads/2025/10/Exterior01-1-2048x1132.jpg" alt="Exterior of The Zero Phuket residences" loading="lazy" decoding="async" /></figure>
+			</div>
+		</section>
+
+		<section class="ab-story">
+			<div class="wrap ab-split ab-split--media-first">
+				<div class="ab-photos reveal">
+					<figure class="ab-figure"><img src="/images/about/founders-on-the-water.webp" alt="Robert Hodge and Vid Randelovic on a boat" loading="lazy" decoding="async" /></figure>
+					<figure class="ab-figure"><img src="/images/about/kitesurfing-panwa.webp" alt="Kitesurfing in Panwa" loading="lazy" decoding="async" /></figure>
+					<figure class="ab-figure"><img src="/images/about/on-the-beach.webp" alt="Preparing kites on the beach" loading="lazy" decoding="async" /></figure>
+					<p class="ab-caption">Robert and Vid: on the water, where the idea was born.</p>
+				</div>
+				<div class="reveal">
+					<span class="eyebrow">Our story</span>
+					<h2>It started on the water</h2>
+					<p>Robert Hodge came to Phuket to be close to his son and grandsons, with no plans to build again. Then he met Vid Randelovic, kitesurfing in Panwa: two people who live for the wind, the waves and the outdoors.</p>
+					<p>One afternoon on a boat, Robert showed Vid what he had built in London and asked: why not bring the same ethos to Phuket?</p>
+					<p>A life spent on the ocean made protecting it personal. Sustainability became the starting point of every Zero building, from solar power and rainwater harvesting to Phuket’s first single-use plastic-free condominium.</p>
+					<p>Wipapon Noonsimi completed the founding team, steering the land acquisitions and shaping every interior.</p>
+					<p class="ab-close">Together, they became The Zero Phuket.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-leaders">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">Leadership</span>
+					<h2>Our leadership</h2>
+				</div>
+				<div class="ab-people">
+					{leaders.map((p) => (
+						<article class="ab-person reveal">
+							<img src={p.photo} alt={p.name} loading="lazy" decoding="async" />
+							<h3>{p.name}</h3>
+							<p class="ab-role">{p.role}</p>
+							<p>{p.text}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-values">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">What Zero means</span>
+					<h2>Homes worthy of the island we love</h2>
+				</div>
+				<div class="ab-promises">
+					<div class="reveal">
+						<h3>Zero compromise on quality</h3>
+						<p>Boutique developments with attention to every detail. British standards, quality control at every stage, and materials chosen to last in the tropics.</p>
+					</div>
+					<div class="reveal">
+						<h3>Zero harm to the island</h3>
+						<p>Solar power, rainwater harvesting and single-use plastic-free living, so our buildings give back more than they take.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-details">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">Both promises, in the details</span>
+					<h2>Built to last in the tropics</h2>
+				</div>
+				<div class="ab-grid3">
+					{details.map(([title, text]) => (
+						<div class="reveal">
+							<h3>{title}</h3>
+							<p>{text}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-numbers">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">At a glance</span>
+					<h2>The Zero in numbers</h2>
+				</div>
+				<div class="ab-figures">
+					{numbers.map(([value, label]) => (
+						<div class="reveal"><strong>{value}</strong><span>{label}</span></div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-sw20">
+			<div class="wrap ab-split ab-split--media-first">
+				<div class="ab-stack reveal">
+					<figure class="ab-figure"><img src="/images/about/the-zero-sw20-london.webp" alt="The Zero SW20 in Raynes Park, London" loading="lazy" decoding="async" /></figure>
+					<figure class="ab-figure"><img src="/images/about/the-zero-sw20-interior.webp" alt="Living room at The Zero SW20" loading="lazy" decoding="async" /></figure>
+				</div>
+				<div class="reveal">
+					<span class="eyebrow">Where it began</span>
+					<h2>The Zero SW20, London</h2>
+					<p>Robert’s most ambitious UK project, in Raynes Park, London: proof that solar generation, battery storage, high-performance insulation and advanced glazing could sit inside a high-quality home without compromising design or value.</p>
+					<dl class="ab-facts">
+						<div><dt>Homes</dt><dd>35, studios to penthouses</dd></div>
+						<div><dt>Value</dt><dd>About £26M GDV</dd></div>
+						<div><dt>Energy rating</dt><dd>A-rated</dd></div>
+						<div><dt>Result</dt><dd>Completed 2023, fully sold</dd></div>
+						<div class="ab-wide"><dt>Recognition</dt><dd>Energy Efficiency Award 2022, Best London Development</dd></div>
+					</dl>
+					<p class="ab-close">The blueprint for everything we now build in Phuket.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-contractor">
+			<div class="wrap ab-split">
+				<div class="reveal">
+					<span class="eyebrow">Our main contractor</span>
+					<h2>Built by Big Man Asset</h2>
+					<dl class="ab-facts ab-facts--one">
+						<div><dt>Experience</dt><dd>15+ years building in Southern Thailand, since 2010</dd></div>
+						<div><dt>In-house team</dt><dd>350+ professionals, scalable beyond 500</dd></div>
+						<div><dt>Engineering</dt><dd>Licensed engineers and architects, with MEP and smart-home systems by partner Top Point Innovation</dd></div>
+						<div><dt>Phuket projects</dt><dd>The Happy Place Condo, Layan Lucky Villas, Verve Pool Villas, Mutti Family Villas</dd></div>
+					</dl>
+				</div>
+				<figure class="ab-figure reveal">
+					<img src="/images/about/big-man-asset-team.webp" alt="Big Man Asset’s team on The Zero Bang Tao site" loading="lazy" decoding="async" />
+					<figcaption>Big Man Asset’s team on The Zero Bang Tao site.</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="ab-quality">
+			<div class="wrap ab-quality-grid">
+				<div class="ab-portrait reveal">
+					<img src="/wp-content/uploads/2026/05/juergen.webp" alt="Juergen E. Seidel" loading="lazy" decoding="async" />
+					<h3>Juergen E. Seidel</h3>
+					<p class="ab-role">Owner’s Representative</p>
+				</div>
+				<div class="reveal">
+					<span class="eyebrow">Quality control</span>
+					<h2>Independent eyes on every stage</h2>
+					<p class="ab-lead">On both projects, Juergen works on the owner’s side, reviewing design, cost, programme and quality before each stage is signed off.</p>
+					<dl class="ab-facts">
+						<div><dt>Experience</dt><dd>Over three decades delivering projects across Thailand and the Middle East</dd></div>
+						<div><dt>Certified</dt><dd>PMI® PMP project manager and ISO 9000 consultant</dd></div>
+						<div class="ab-wide"><dt>Portfolio</dt><dd>Four Seasons Chao Phraya Bangkok, Six Senses Yao Noi, Lebua Hotels, Siemens MEA substations and several Laguna Phuket residential developments</dd></div>
+					</dl>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-progress">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">Construction progress · The Zero Bang Tao</span>
+					<h2>Rising in Bang Tao</h2>
+				</div>
+				<div class="ab-progress-grid">
+					<figure class="ab-figure reveal">
+						<img src="/images/about/the-zero-bang-tao-construction-aerial.webp" alt="The Zero Bang Tao under construction, from the air" loading="lazy" decoding="async" />
+						<figcaption>The Zero Bang Tao from the air, with the Andaman Sea beyond.</figcaption>
+					</figure>
+					<div class="reveal">
+						<figure class="ab-figure"><img src="/images/about/ground-breaking-ceremony.webp" alt="Ground-breaking ceremony at The Zero Bang Tao" loading="lazy" decoding="async" /></figure>
+						<dl class="ab-facts ab-facts--one">
+							<div><dt>Ground broken</dt><dd>February 2025</dd></div>
+							<div><dt>Sales</dt><dd>85% sold</dd></div>
+							<div><dt>Handover</dt><dd>Q1 2027</dd></div>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-award" aria-label="Recognition">
+			<div class="wrap">
+				<p><span>Recognition · Dot Property Thailand Awards 2025</span><span>Awarded to The Zero Bang Tao</span></p>
+			</div>
+		</section>
+
+		<section class="ab-addresses">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">Two addresses</span>
+					<h2>Which one is for you?</h2>
+				</div>
+				<div class="project-grid">
+					<article class="project reveal">
+						<div class="project-img"><a href="/bang-tao" tabindex="-1" aria-hidden="true"><img src="/wp-content/uploads/2026/05/heroBuilding.webp" alt="The Zero Bang Tao building exterior" loading="lazy" decoding="async" /></a></div>
+						<div class="project-body">
+							<span class="loc">For the social side of Phuket</span>
+							<h3><a href="/bang-tao">The Zero Bang Tao</a></h3>
+							<p>5 minutes to Bang Tao Beach, close to Boat Avenue, Porto de Phuket and the island’s best beach clubs. 25 minutes to the airport.</p>
+							<p class="ab-price">From ฿6M · Completion Q1 2027</p>
+							<div class="project-actions"><a href="/bang-tao" class="btn btn-bronze">Explore The Zero Bang Tao</a></div>
+						</div>
+					</article>
+					<article class="project reveal">
+						<div class="project-img"><a href="/silhouette-nai-yang" tabindex="-1" aria-hidden="true"><img src="/wp-content/uploads/2026/05/nai-yang-exterior-01.webp" alt="Silhouette by The Zero exterior" loading="lazy" decoding="async" /></a></div>
+						<div class="project-body">
+							<span class="loc">For calm and nature</span>
+							<h3><a href="/silhouette-nai-yang">Silhouette by The Zero</a></h3>
+							<p>350 m to Nai Yang Beach, beside Sirinat National Park, and just 5 minutes from Phuket International Airport.</p>
+							<p class="ab-price">From ฿5.12M · Completion Q2 2028</p>
+							<div class="project-actions"><a href="/silhouette-nai-yang" class="btn btn-bronze">Explore Silhouette</a></div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-giving">
+			<figure class="ab-banner reveal"><img src="/images/about/zero-padel-league.webp" alt="Players at the Zero Padel League" loading="lazy" decoding="async" /></figure>
+			<div class="wrap ab-giving-grid">
+				<div class="reveal">
+					<span class="eyebrow">Giving back</span>
+					<h2>Part of the island</h2>
+				</div>
+				<div class="reveal">
+					<h3>Zero Padel League</h3>
+					<p>Padel courts and a café at Silhouette, and a league that brings owners, residents and neighbours together.</p>
+				</div>
+				<div class="reveal">
+					<h3>Asia Center Foundation</h3>
+					<p>Regular donations supporting underprivileged children from Thailand and Myanmar with education, safe accommodation and life skills.</p>
+					<p><a class="ab-link" href="https://asiacenterfoundation.org/" target="_blank" rel="noopener">asiacenterfoundation.org</a></p>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-own">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="eyebrow">Owning a Zero home</span>
+					<h2>Simple to own</h2>
+				</div>
+				<div class="ab-own-grid">
+					<div class="ab-prices reveal">
+						<div><span>The Zero Bang Tao</span><strong>฿6M</strong><small>starting price</small></div>
+						<div><span>Silhouette</span><strong>฿5.12M</strong><small>starting price</small></div>
+					</div>
+					<div class="reveal">
+						<h3>Payment plan</h3>
+						<div class="ab-plan" role="img" aria-label="35% on contract, 55% during construction, 10% at handover">
+							<span style="flex:35">35% contract</span><span style="flex:55">55% during construction</span><span style="flex:10">10%</span>
+						</div>
+						<p>Reserve with ฿100,000. Final 10% at handover. Flexible plans available.</p>
+						<h3>Ownership &amp; income</h3>
+						<p>Freehold or leasehold. Optional 70/30 rental pool, with 70% to the owner, and an owner app for bookings and income.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ab-faq" id="faq">
+			<div class="wrap faq-grid">
+				<div class="faq-side reveal">
+					<span class="eyebrow">FAQ</span>
+					<div class="section-head" style="margin-bottom:0"><h2>Good to know</h2></div>
+				</div>
+				<div class="reveal">
+					{faqItems.map((i) => (
+						<details>
+							<summary>{i.q}</summary>
+							{i.a.map((x) => (<p>{x}</p>))}
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<section class="contact" id="contact">
+		<div class="wrap contact-grid">
+			<div class="contact-copy reveal">
+				<span class="eyebrow">Book a private site visit</span>
+				<h2>Come and see it</h2>
+				<ul class="perks">
+					<li><Fragment set:html={tick} /><a href="tel:+66956516795">+66 95 651 6795</a></li>
+					<li><Fragment set:html={tick} /><a href="mailto:info@thezerophuket.com">info@thezerophuket.com</a></li>
+					<li><Fragment set:html={tick} />58/8 Lagoon Road, Cherngtalay, Thalang, Phuket 83110</li>
+				</ul>
+				<div class="direct">
+					<a href="https://wa.me/66956516795" target="_blank" rel="noopener" class="btn btn-gold">WhatsApp Us</a>
+				</div>
+			</div>
+			<LeadFormCard formId="website_contact" title="Book a private site visit" button="Send" note="No obligation · Response within 24 hours" projectChoice />
+		</div>
+	</section>
+</Site>
