@@ -10,7 +10,7 @@ export const prerender = false;
 export const GET: APIRoute = ({ request }) => {
 	const cf = (request as Request & { cf?: { country?: string } }).cf;
 	const country = cf?.country || request.headers.get("cf-ipcountry") || "";
-	return new Response(JSON.stringify({ country, build: "routes-1" }), {
+	return new Response(JSON.stringify({ country, build: "live-prep-1" }), {
 		headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
 	});
 };
