@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Zero Phuket — Performance Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#2B1810;--ink60:rgba(43,24,16,.6);--ink30:rgba(43,24,16,.3);--ink10:rgba(43,24,16,.08);
+  --gold:#C8B072;--gold-deep:#9E873D;--gold-bg:rgba(200,176,114,.12);
+  --green:#2D8B55;--green-bg:rgba(45,139,85,.1);
+  --red:#B03030;--red-bg:rgba(176,48,48,.1);
+  --blue:#2A6496;--blue-bg:rgba(42,100,150,.1);
+  --amber:#9B7A1C;--amber-bg:rgba(155,122,28,.1);
+  --bg:#F8F4EE;--card:#FFFFFF;
+  --radius:12px;--shadow:0 2px 16px rgba(43,24,16,.06);
+}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+
+/* ── HEADER ── */
+.header{background:var(--ink);color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center}
+.header-logo{font-size:1.1rem;font-weight:700;letter-spacing:.04em;color:var(--gold)}
+.header-sub{font-size:.72rem;opacity:.5;margin-top:2px;font-weight:400}
+.header-date{font-size:.72rem;opacity:.4;text-align:right}
+
+/* ── TAB BAR ── */
+.tab-bar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--gold-bg);padding:0 32px;display:flex;gap:0}
+.tab-btn{padding:14px 24px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:none;background:none;cursor:pointer;color:var(--ink30);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn.active{color:var(--ink);border-bottom-color:var(--gold)}
+
+/* ── TAB CONTENT ── */
+.tab{display:none}.tab.active{display:block}
+.page{max-width:1100px;margin:0 auto;padding:32px}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.hero-card{background:var(--card);border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.hero-card.green::before{background:var(--green)}
+.hero-card.blue::before{background:var(--blue)}
+.hero-eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink30);margin-bottom:8px}
+.hero-num{font-size:2.8rem;font-weight:800;line-height:1;color:var(--ink)}
+.hero-num.gold{color:var(--gold-deep)}
+.hero-num.green{color:var(--green)}
+.hero-num.blue{color:var(--blue)}
+.hero-label{font-size:.78rem;color:var(--ink60);margin-top:6px}
+.hero-delta{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;margin-top:10px;padding:3px 8px;border-radius:20px}
+.hero-delta.good{background:var(--green-bg);color:var(--green)}
+.hero-delta.warn{background:var(--amber-bg);color:var(--amber)}
+
+/* ── SECTION HEADER ── */
+.section-hd{margin:32px 0 16px}
+.section-hd h2{font-size:1rem;font-weight:700;color:var(--ink)}
+.section-hd p{font-size:.78rem;color:var(--ink60);margin-top:4px}
+.eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+.card-title{font-size:.8rem;font-weight:700;color:var(--ink);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.chart-wrap{position:relative}
+
+/* ── INSIGHT BOX ── */
+.insight{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:20px;font-size:.8rem;color:var(--ink)}
+.insight strong{color:var(--gold-deep)}
+.insight.green{background:var(--green-bg);border-left-color:var(--green)}
+.insight.green strong{color:var(--green)}
+.insight.red{background:var(--red-bg);border-left-color:var(--red)}
+.insight.red strong{color:var(--red)}
+
+/* ── TABLES ── */
+.tb{width:100%;border-collapse:collapse;font-size:.78rem}
+.tb th{padding:8px 12px;text-align:left;font-weight:600;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink30);border-bottom:1px solid var(--ink10)}
+.tb td{padding:10px 12px;border-bottom:1px solid var(--ink10)}
+.tb tr:last-child td{border-bottom:none}
+.tb .highlight{background:rgba(200,176,114,.08)}
+.tb .total-row td{font-weight:700;border-top:2px solid var(--ink10);padding-top:12px}
+.tb tr:hover td{background:var(--ink10)}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.65rem;font-weight:700}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gold{background:var(--gold-bg);color:var(--gold-deep)}
+
+/* ── PROSPECT CARDS ── */
+.prospect-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.p-card{background:var(--card);border-radius:10px;padding:16px;box-shadow:var(--shadow);border-top:3px solid var(--green)}
+.p-card.meeting{border-top-color:var(--blue)}
+.p-card.qualified{border-top-color:var(--gold)}
+.p-name{font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.p-meta{font-size:.68rem;color:var(--ink60)}
+.p-meta span{display:block;margin-bottom:2px}
+.p-stage{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.stage-prospect{background:var(--green-bg);color:var(--green)}
+.stage-qualified{background:var(--gold-bg);color:var(--gold-deep)}
+.stage-meeting{background:var(--blue-bg);color:var(--blue)}
+
+/* ── FUNNEL ── */
+.funnel{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.funnel-row{display:flex;align-items:center;gap:12px;margin-bottom:0;margin-top:16px}
+.funnel-bar-wrap{flex:1;background:var(--ink10);border-radius:4px;height:32px;overflow:hidden}
+.funnel-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 12px;font-size:.78rem;font-weight:700;color:#fff;white-space:nowrap;transition:width .6s ease}
+.funnel-label{width:110px;font-size:.78rem;font-weight:700;color:var(--ink60);text-align:right}
+.funnel-count{width:60px;font-size:.88rem;font-weight:800;color:var(--ink);text-align:right}
+.funnel-rate{width:54px;font-size:.72rem;font-weight:600;color:var(--ink30);text-align:right}
+.funnel-src{display:flex;gap:0;margin-left:122px;margin-right:114px;margin-top:8px;border-radius:4px;overflow:hidden;height:10px}
+.funnel-src span{display:block;height:100%}
+.funnel-src-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 8px;margin-left:122px;margin-right:114px;margin-top:6px;margin-bottom:12px;padding:10px;background:var(--bg);border-radius:8px}
+.funnel-src-legend .fsl-item{display:flex;align-items:center;gap:7px;padding:4px 6px;border-radius:5px}
+.funnel-src-legend .fsl-dot{display:inline-block;width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.funnel-src-legend .fsl-name{font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.01em}
+.funnel-src-legend .fsl-n{font-size:.78rem;font-weight:800;color:var(--ink);margin-left:auto;padding-left:6px}
+.funnel-src-legend .fsl-pct{font-size:.68rem;font-weight:600;color:var(--ink30);margin-left:3px}
+.funnel-divider{height:1px;background:var(--ink10);margin:4px 0}
+
+/* ── SPAM JOURNEY ── */
+.journey{display:flex;align-items:center;gap:0;margin:16px 0}
+.journey-step{flex:1;text-align:center;padding:12px 4px;position:relative}
+.journey-step::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--ink30);font-size:1.2rem}
+.journey-step:last-child::after{display:none}
+.journey-wk{font-size:.6rem;color:var(--ink30);margin-bottom:4px}
+.journey-pct{font-size:1.6rem;font-weight:800}
+.journey-pct.bad{color:var(--red)}
+.journey-pct.ok{color:var(--amber)}
+.journey-pct.good{color:var(--green)}
+.journey-n{font-size:.62rem;color:var(--ink30);margin-top:2px}
+
+/* ── AT-RISK ── */
+.risk-bar{display:flex;border-radius:8px;overflow:hidden;height:32px;margin-bottom:8px}
+.risk-seg{display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#fff;white-space:nowrap;transition:width .5s}
+
+/* ── STAT ROW ── */
+.stat-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:20px}
+.stat{text-align:center}
+.stat-num{font-size:1.6rem;font-weight:800;color:var(--ink)}
+.stat-lbl{font-size:.62rem;color:var(--ink30);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .hero{grid-template-columns:1fr}.grid-2,.grid-3{grid-template-columns:1fr}
+  .page{padding:16px}.tab-btn{padding:10px 12px;font-size:.68rem}
+  .journey-pct{font-size:1.1rem}
+}
+.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 28px;margin-top:10px}
+.agenda-sec{min-width:0}
+.agenda-hd{font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 4px;padding-bottom:3px;border-bottom:1px solid rgba(45,139,85,.25)}
+.agenda ul{margin:0;padding-left:16px;font-size:.78rem;line-height:1.55;color:var(--ink)}
+.agenda li{margin:2px 0}
+.agenda li strong{color:var(--green)}
+.agenda-top{font-size:.86rem;font-weight:700;color:var(--green);margin-bottom:2px}
+.agenda-sub{font-size:.74rem;color:var(--ink60);margin-bottom:4px}
+@media(max-width:700px){.agenda{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+
+<div class="header"><div><div class="header-logo">The Zero Phuket — SATI Performance</div><div class="header-sub">Google Ads leads · Kommo CRM</div></div><div class="header-date">Updated: November 20, 2026</div></div>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('week',this)">This Week</button>
+  <button class="tab-btn" onclick="showTab('month',this)">November</button>
+  <button class="tab-btn" onclick="showTab('monthly',this)">Monthly</button>
+</div>
+<div id="tab-week" class="tab active"><div class="page">
+  <div class="section-hd"><div class="eyebrow">Latest complete period · Kommo export Nov 20 · leads have had a week to qualify</div><h2>Nov 1–10 <span style="color:var(--ink30);font-weight:500">vs Oct 27–Nov 3</span></h2></div>
+  <div class="hero" style="grid-template-columns:repeat(4,1fr)">
+<div class="hero-card"><div class="hero-eyebrow">Total leads</div><div class="hero-num" style="color:var(--green)">82</div><div class="hero-label">52 Oct 27–Nov 3 <span class="badge badge-green">+58%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Qualified leads (Prospect+)</div><div class="hero-num" style="color:var(--gold-deep)">23</div><div class="hero-label">12 Oct 27–Nov 3 <span class="badge badge-green">+92%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per lead</div><div class="hero-num" style="color:var(--blue)">฿2,351</div><div class="hero-label">฿2,477 Oct 27–Nov 3 <span class="badge badge-green">-5%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per qualified lead</div><div class="hero-num" style="color:var(--blue)">฿8,383</div><div class="hero-label">฿10,735 Oct 27–Nov 3 <span class="badge badge-green">-22%</span></div></div>
+</div>
+  <div class="insight green"><strong>82 leads at ฿2,351 per lead, and cost per qualified lead down 22% to ฿8,383.</strong> International Search delivered 14 qualified leads at ฿8,739 each, against ฿22,684 the period before. Nov 11–20 brought 98 more leads at ฿2,076 each, below the ฿2,351 of Nov 1–10.</div>
+  <div style="font-size:.7rem;color:var(--ink30);margin:-8px 0 20px">All four figures count the same days: leads created Nov 1–10 (ten days) vs Oct 27–Nov 3 (eight days), spend from the Google Ads reports for those days. Qualified = reached Prospect or beyond in Kommo. A period is reported once its leads are at least a week old.</div>
+  <div class="card" style="display:flex;gap:36px;align-items:baseline;padding:14px 22px;margin:-6px 0 18px"><div style="font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink30);font-weight:600">Newest period · Nov 11–20</div>
+    <div><span style="font-size:1.35rem;font-weight:700;color:var(--green)">98</span> <span style="color:var(--ink30)">leads</span></div>
+    <div><span style="font-size:1.35rem;font-weight:700;color:var(--blue)">฿2,076</span> <span style="color:var(--ink30)">per lead</span></div>
+    <div style="color:var(--ink30)">qualified leads reported next week</div></div>
+  <div class="grid-2"><div class="card"><div class="card-title">By campaign <span style="font-weight:500;color:var(--ink30)">· grey = Oct 27–Nov 3</span></div>
+<table class="tb"><thead><tr><th>Campaign</th><th>Total leads</th><th>Qualified</th><th>Cost per lead</th><th>Cost per qualified</th></tr></thead><tbody>
+<tr><td><strong>Search (international)</strong></td><td>38 <span style="color:var(--ink30)">25</span></td><td>14 <span style="color:var(--ink30)">4</span></td><td>฿3,220 <span style="color:var(--ink30)">฿3,629</span></td><td>฿8,739 <span style="color:var(--ink30)">฿22,684</span></td></tr>
+<tr><td><strong>US Search</strong></td><td>36 <span style="color:var(--ink30)">22</span></td><td>6 <span style="color:var(--ink30)">6</span></td><td>฿1,685 <span style="color:var(--ink30)">฿1,471</span></td><td>฿10,113 <span style="color:var(--ink30)">฿5,393</span></td></tr>
+<tr><td><strong>PMax</strong></td><td>5 <span style="color:var(--ink30)">3</span></td><td>1 <span style="color:var(--ink30)">0</span></td><td>฿1,500 <span style="color:var(--ink30)">฿1,812</span></td><td>฿7,500 <span style="color:var(--ink30)">—</span></td></tr>
+</tbody></table></div><div class="card"><div class="card-title">By country <span style="font-weight:500;color:var(--ink30)">· grey = Oct 27–Nov 3</span></div>
+<table class="tb"><thead><tr><th>Country (phone number)</th><th>Total leads</th><th>Qualified</th></tr></thead><tbody><tr><td><strong>US / Canada</strong></td><td>43 <span style="color:var(--ink30)">26</span></td><td>9 <span style="color:var(--ink30)">7</span></td></tr><tr><td><strong>United Kingdom</strong></td><td>10 <span style="color:var(--ink30)">4</span></td><td>3 <span style="color:var(--ink30)">0</span></td></tr><tr><td><strong>India</strong></td><td>7 <span style="color:var(--ink30)">6</span></td><td>2 <span style="color:var(--ink30)">0</span></td></tr><tr><td><strong>Australia</strong></td><td>4 <span style="color:var(--ink30)">6</span></td><td>0 <span style="color:var(--ink30)">2</span></td></tr><tr><td><strong>Bulgaria</strong></td><td>2 <span style="color:var(--ink30)">1</span></td><td>2 <span style="color:var(--ink30)">0</span></td></tr><tr><td><strong>Germany</strong></td><td>2 <span style="color:var(--ink30)">1</span></td><td>2 <span style="color:var(--ink30)">1</span></td></tr><tr><td><strong>Malaysia</strong></td><td>2 <span style="color:var(--ink30)">1</span></td><td>1 <span style="color:var(--ink30)">1</span></td></tr><tr><td><strong>France</strong></td><td>2 <span style="color:var(--ink30)">1</span></td><td>0 <span style="color:var(--ink30)">0</span></td></tr><tr><td>All other countries</td><td>10 <span style="color:var(--ink30)">6</span></td><td>4 <span style="color:var(--ink30)">1</span></td></tr></tbody></table></div></div>
+  <div class="card"><div class="card-title">Leads &amp; qualified leads by week</div><div class="chart-wrap" style="height:220px"><canvas id="weeklyTrend"></canvas></div></div>
+</div></div>
+<div id="tab-month" class="tab"><div class="page">
+  <div class="section-hd"><div class="eyebrow">November to date · Google Ads report Nov 1–20</div><h2>Nov 1–20 <span style="color:var(--ink30);font-weight:500">vs October</span></h2></div>
+  <div class="hero" style="grid-template-columns:repeat(4,1fr)">
+<div class="hero-card"><div class="hero-eyebrow">Total leads</div><div class="hero-num" style="color:var(--green)">180</div><div class="hero-label">100 Oct 1–20 <span class="badge badge-green">+80%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Qualified leads (Prospect+)</div><div class="hero-num" style="color:var(--gold-deep)">32</div><div class="hero-label">30 Oct 1–20 <span class="badge badge-green">+7%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per lead</div><div class="hero-num" style="color:var(--blue)">฿2,202</div><div class="hero-label">฿3,170 October <span class="badge badge-green">-31%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per qualified lead</div><div class="hero-num" style="color:var(--blue)">฿12,384</div><div class="hero-label">฿10,369 October <span class="badge badge-red">+19%</span></div></div>
+</div>
+  <div class="insight green"><strong>180 leads in twenty days, against 100 in the first twenty days of October (+80%), at ฿2,202 per lead — 31% below October.</strong> 32 have already reached Prospect or beyond. 17 SATI meetings are live in Kommo.</div>
+  <div style="font-size:.7rem;color:var(--ink30);margin:-8px 0 20px">Leads created Nov 1–20, spend from the Google Ads report for the same days. Qualified = reached Prospect or beyond in Kommo; November's newest leads are still being worked, so this number will rise.</div>
+  <div class="grid-2"><div class="card"><div class="card-title">By campaign <span style="font-weight:500;color:var(--ink30)">· Nov 1–20</span></div>
+<table class="tb"><thead><tr><th>Campaign</th><th>Total leads</th><th>Qualified</th><th>Cost per lead</th><th>Cost per qualified</th></tr></thead><tbody>
+<tr><td><strong>Search (international)</strong></td><td>94</td><td>21</td><td>฿2,677</td><td>฿11,985</td></tr>
+<tr><td><strong>US Search</strong></td><td>69</td><td>6</td><td>฿1,795</td><td>฿20,638</td></tr>
+<tr><td><strong>PMax</strong></td><td>9</td><td>2</td><td>฿1,733</td><td>฿7,799</td></tr>
+</tbody></table></div><div class="card"><div class="card-title">By country <span style="font-weight:500;color:var(--ink30)">· grey = Oct 1–20</span></div>
+<table class="tb"><thead><tr><th>Country (phone number)</th><th>Total leads</th><th>Qualified</th></tr></thead><tbody><tr><td><strong>US / Canada</strong></td><td>85 <span style="color:var(--ink30)">13</span></td><td>10 <span style="color:var(--ink30)">7</span></td></tr><tr><td><strong>United Kingdom</strong></td><td>24 <span style="color:var(--ink30)">20</span></td><td>4 <span style="color:var(--ink30)">6</span></td></tr><tr><td><strong>India</strong></td><td>16 <span style="color:var(--ink30)">6</span></td><td>3 <span style="color:var(--ink30)">5</span></td></tr><tr><td><strong>Australia</strong></td><td>15 <span style="color:var(--ink30)">16</span></td><td>2 <span style="color:var(--ink30)">3</span></td></tr><tr><td><strong>Thailand</strong></td><td>5 <span style="color:var(--ink30)">21</span></td><td>0 <span style="color:var(--ink30)">2</span></td></tr><tr><td><strong>Singapore</strong></td><td>3 <span style="color:var(--ink30)">3</span></td><td>2 <span style="color:var(--ink30)">0</span></td></tr><tr><td><strong>Germany</strong></td><td>3 <span style="color:var(--ink30)">0</span></td><td>3 <span style="color:var(--ink30)">0</span></td></tr><tr><td><strong>Malaysia</strong></td><td>3 <span style="color:var(--ink30)">0</span></td><td>2 <span style="color:var(--ink30)">0</span></td></tr><tr><td>All other countries</td><td>26 <span style="color:var(--ink30)">21</span></td><td>6 <span style="color:var(--ink30)">7</span></td></tr></tbody></table></div></div>
+  <div class="card"><div class="card-title">Leads by day of month</div><div class="chart-wrap" style="height:200px"><canvas id="monthDaily"></canvas></div></div>
+  <div class="section-hd"><div class="eyebrow">Last complete month · Google Ads report Oct 1–31</div><h2>October <span style="color:var(--ink30);font-weight:500">vs Sep 1–28</span></h2></div>
+  <div class="hero" style="grid-template-columns:repeat(4,1fr)">
+<div class="hero-card"><div class="hero-eyebrow">Total leads</div><div class="hero-num" style="color:var(--green)">157</div><div class="hero-label">260 Sep 1–28 <span class="badge badge-red">-40%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Qualified leads (Prospect+)</div><div class="hero-num" style="color:var(--gold-deep)">48</div><div class="hero-label">55 Sep 1–28 <span class="badge badge-red">-13%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per lead</div><div class="hero-num" style="color:var(--blue)">฿3,170</div><div class="hero-label">฿1,711 Sep 1–28 <span class="badge badge-red">+85%</span></div></div>
+<div class="hero-card"><div class="hero-eyebrow">Cost per qualified lead</div><div class="hero-num" style="color:var(--blue)">฿10,369</div><div class="hero-label">฿8,090 Sep 1–28 <span class="badge badge-red">+28%</span></div></div>
+</div>
+  <div style="font-size:.7rem;color:var(--ink30);margin:-8px 0 20px">All four figures count the same days: October (Oct 1–31) vs Sep 1–28 — September spend was last pulled to the 28th. Qualified = reached Prospect or beyond in Kommo.</div>
+</div></div>
+<div id="tab-monthly" class="tab"><div class="page">
+  <div class="section-hd"><div class="eyebrow">2026 by month</div><h2>Monthly</h2></div>
+  <div class="card"><table class="tb"><thead><tr><th>Month</th><th>Total leads</th><th>Qualified leads (Prospect+)</th><th>Cost per lead</th><th>Cost per qualified lead</th></tr></thead><tbody>
+<tr><td><strong>Jan</strong></td><td>20</td><td>6</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Feb</strong></td><td>66</td><td>19</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Mar</strong></td><td>34</td><td>6</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Apr</strong></td><td>71</td><td>4</td><td>—</td><td>—</td></tr>
+<tr><td><strong>May</strong></td><td>280</td><td>42</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Jun</strong></td><td>500</td><td>78</td><td>฿1,670</td><td>฿9,396</td></tr>
+<tr><td><strong>Jul</strong></td><td>402</td><td>88</td><td>฿1,407</td><td>฿4,924</td></tr>
+<tr><td><strong>Aug</strong></td><td>277</td><td>89</td><td>฿1,448</td><td>฿4,540</td></tr>
+<tr><td><strong>Sep</strong></td><td>270</td><td>59</td><td>฿1,711</td><td>฿8,090</td></tr>
+<tr><td><strong>Oct</strong></td><td>157</td><td>48</td><td>฿3,170</td><td>฿10,369</td></tr>
+<tr class=highlight><td><strong>Nov 1–20</strong></td><td>180</td><td>32</td><td>฿2,202</td><td>฿12,384</td></tr>
+</tbody></table>
+  <div style="margin-top:10px;font-size:.7rem;color:var(--ink30)">November: Google Ads report Nov 1–20. September cost per lead on spend to Sep 28. Jan–May: no Google Ads spend data.</div></div>
+  <div class="card"><div class="card-title">Leads &amp; qualified leads by month</div><div class="chart-wrap" style="height:240px"><canvas id="monthlySati"></canvas></div></div>
+  <div class="card"><div class="card-title">Sales from SATI leads</div><table class="tb"><thead><tr><th>#</th><th>Unit</th><th>Value</th><th>Reserved</th><th>Status</th></tr></thead><tbody>
+    <tr><td>1</td><td>Nai Yang B505</td><td>฿7,064,000</td><td>Jun 1</td><td>Reservation paid</td></tr>
+    <tr><td>2</td><td>Bangtao 401</td><td>฿6,627,000</td><td>Jul 28</td><td>SPA payment</td></tr>
+    <tr><td>3</td><td>Bangtao 215</td><td>฿5,702,715</td><td>Jul 28</td><td>SPA payment</td></tr>
+    <tr><td>4</td><td>Nai Yang</td><td>฿10,361,821</td><td>early Aug</td><td><span class="badge badge-green">Paid in full</span></td></tr>
+    <tr><td>5</td><td>Nai Yang A504</td><td>฿5,300,000</td><td>Aug 10</td><td>Contract payment</td></tr>
+    <tr><td>6</td><td>Bangtao 707</td><td>฿5,010,000</td><td>Aug 17–23</td><td>Record closed Oct 10 — to confirm</td></tr>
+    <tr><td>7</td><td>Nai Yang A405</td><td>฿4,313,250</td><td>Sep 6</td><td>Contract payment</td></tr>
+    <tr><td>8</td><td>Nai Yang A407</td><td>฿4,655,571</td><td>Sep 6</td><td>Contract payment</td></tr>
+    <tr><td>9</td><td>Bangtao 723</td><td>฿7,321,053</td><td>Sep 8</td><td><span class="badge badge-green">Paid in full Oct 15</span></td></tr>
+    <tr class="total-row"><td></td><td>9 sales</td><td>฿56.36M</td><td></td><td>two paid in full · ฿17.7M</td></tr>
+  </tbody></table></div>
+</div></div>
+<script>
+function showTab(id,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');window.scrollTo(0,0);}
+Chart.defaults.color='rgba(43,24,16,.6)'; Chart.defaults.font={family:'Montserrat',size:11};
+const GRID={color:'rgba(43,24,16,.06)'}, LEG={position:'bottom',labels:{boxWidth:12}};
+new Chart(document.getElementById('weeklyTrend'),{type:'bar',data:{labels:["Aug 24", "Aug 31", "Sep 07", "Sep 14", "Sep 21", "Sep 28", "Oct 05", "Oct 12", "Oct 19", "Oct 26", "Nov 02", "Nov 09"],datasets:[
+  {label:'Total leads',data:[69, 78, 94, 58, 32, 35, 38, 35, 29, 44, 57, 68],backgroundColor:'#C8A84B',borderRadius:4,order:2},
+  {label:'Qualified (Prospect+)',data:[22, 16, 23, 10, 8, 12, 7, 10, 15, 10, 18, 5],type:'line',borderColor:'#2D8B55',backgroundColor:'#2D8B55',tension:.3,pointRadius:3,order:1}]},
+ options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false}},y:{grid:GRID,beginAtZero:true}},plugins:{legend:LEG}}});
+new Chart(document.getElementById('monthDaily'),{type:'bar',data:{labels:["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],datasets:[
+  {label:'October',data:[6, 1, 8, 4, 6, 1, 1, 12, 5, 6, 7, 8, 4, 3, 4, 6, 5, 5, 6, 2, 2, 3, 7, 5, 4, 10, 7, 2, 8, 5, 4],backgroundColor:'rgba(43,24,16,.18)',borderRadius:3},
+  {label:'November',data:[8, 10, 8, 10, 6, 12, 7, 4, 8, 9, 15, 10, 13, 7, 6, 10, 8, 13, 14, 2, null, null, null, null, null, null, null, null, null, null, null],backgroundColor:'#C8A84B',borderRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false}},y:{grid:GRID,beginAtZero:true}},plugins:{legend:LEG}}});
+new Chart(document.getElementById('monthlySati'),{type:'bar',data:{labels:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],datasets:[
+  {label:'Total leads',data:[20, 66, 34, 71, 280, 500, 402, 277, 270, 157],backgroundColor:'#C8A84B',borderRadius:4,order:2},
+  {label:'Qualified (Prospect+)',data:[6, 19, 6, 4, 42, 78, 88, 89, 59, 48],type:'line',borderColor:'#2D8B55',backgroundColor:'#2D8B55',tension:.3,pointRadius:3,yAxisID:'y2',order:1}]},
+ options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false}},y:{grid:GRID,beginAtZero:true},y2:{position:'right',grid:{display:false},beginAtZero:true}},plugins:{legend:LEG}}});
+</script>
+</body>
+</html>
