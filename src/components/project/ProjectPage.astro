@@ -113,7 +113,7 @@ const wide = (i: number) => (i === 0 ? "g-wide g-tall" : wideAt.includes(i) ? "g
 						{u.popular && <span class="badge">Most Popular</span>}
 						<h3>{u.name}</h3>
 						<p class="size">{u.size}</p>
-						<span class="from">From</span>
+						<span class="from">{u.price === "On request" ? "Price" : "From"}</span>
 						<div class="price">{u.price}</div>
 						{u.kicker && <span class="kicker">{u.kicker}</span>}
 						{u.note && <p class="note">{u.note}</p>}

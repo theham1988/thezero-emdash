@@ -77,13 +77,13 @@ export const bangTao: ProjectData = {
 	geo: { placename: "Bang Tao Beach, Phuket", position: "8.0030;98.2950" },
 	hero: {
 		image: `${U}/2026/05/heroBuilding.webp`,
-		badges: ["Award Winner 2025", "80% Sold"],
+		badges: ["Award Winner 2025", "85% Sold"],
 		title: "Award-Winning Sustainable Condos in Bang Tao",
-		lead: "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and in-house managed rental programme — projecting ~11% annual returns. EIA approved. From 4.6M THB.",
+		lead: "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and in-house managed rental programme — projecting ~11% annual returns. EIA approved. From 6M THB.",
 	},
 	heroStats: [
 		{ value: "10%/yr", label: "Guarantee ROI on selected units." },
-		{ value: "4.6M THB", label: "From" },
+		{ value: "6M THB", label: "From" },
 		{ value: "Up to 25%", label: "Capital Growth" },
 		{ value: "Q1 2027", label: "Completion" },
 	],
@@ -113,13 +113,13 @@ export const bangTao: ProjectData = {
 		heading: "Choose Your Investment",
 		lead: "85 units · 1-bed to 3-bed · 36–95 sqm · Freehold & Leasehold",
 		cards: [
-			{ name: "1 Bedroom", size: "From 36 sqm", price: "5.7M THB", tour: "https://720.3vjia.com/S155093908?lang=en-US-TP1317-G" },
+			{ name: "1 Bedroom", size: "From 36 sqm", price: "On request", tour: "https://720.3vjia.com/S155093908?lang=en-US-TP1317-G" },
 			{ name: "2 Bedroom", size: "From 50 sqm", price: "7.3M THB", popular: true, tour: "https://720.3vjia.com/S155156160?lang=en-US-TP1317-F" },
 			{ name: "3 Bedroom", size: "From 95 sqm", price: "11.4M THB", tour: "https://720.3vjia.com/S153823996?lang=en-US-TP1317-D" },
 		],
 		payment: {
 			title: "Flexible Payment Available",
-			sub: "Reserve from 4.6M THB",
+			sub: "From 6M THB",
 			text: "Staged payments through construction — 35% upon contract signature, 25%, 10%, 10%, 10% and 10% at handover.",
 			cta: "Request Payment Plan",
 		},
@@ -201,7 +201,7 @@ export const bangTao: ProjectData = {
 		],
 	},
 	developer: DEVELOPER,
-	status: { heading: "Now Under Construction", text: "80% Sold · Q1 2027 Completion" },
+	status: { heading: "Now Under Construction", text: "85% Sold · Q1 2027 Completion" },
 	faq: {
 		eyebrow: "FAQ",
 		heading: "Common Questions",
@@ -214,7 +214,7 @@ export const bangTao: ProjectData = {
 			{ q: "Who is the developer?", a: "Zero Developments is British-led with 20+ years experience, 124+ UK residential units delivered, and the award-winning The Zero London — an A-rated energy efficiency residence in London. The Zero Bang Tao is their flagship Phuket project." },
 		],
 	},
-	contact: { eyebrow: "82% Sold — Limited Availability", heading: "Only ~25 Units Remaining", text: "Full floor plans, investment brochure & price list. Response within 24 hours.", ...FORM },
+	contact: { eyebrow: "85% Sold — Limited Availability", heading: "Limited Units Remaining", text: "Full floor plans, investment brochure & price list. Response within 24 hours.", ...FORM },
 };
 
 export const silhouette: ProjectData = {
@@ -227,11 +227,11 @@ export const silhouette: ProjectData = {
 		image: `${U}/2026/05/nai-yang-exterior-01.webp`,
 		badges: ["By Award-Winning Developer", "Construction Started"],
 		title: "Boutique Eco-Living in Phuket's Coastal Zone",
-		lead: "350m from Nai Yang Beach, steps from Sirinat National Park, 7 minutes from the airport. EIA-approved condominiums with hotel-style amenities, 70/30 rental pool, and projected ~11% annual returns. From 4.3M THB.",
+		lead: "350m from Nai Yang Beach, steps from Sirinat National Park, 7 minutes from the airport. EIA-approved condominiums with hotel-style amenities, 70/30 rental pool, and projected ~11% annual returns. From 5.12M THB.",
 	},
 	heroStats: [
 		{ value: "10%/yr", label: "Guarantee ROI on selected units." },
-		{ value: "4.3M THB", label: "From" },
+		{ value: "5.12M THB", label: "From" },
 		{ value: "Up to 30%", label: "Capital Growth" },
 		{ value: "Q2 2028", label: "Completion" },
 	],
@@ -277,7 +277,7 @@ export const silhouette: ProjectData = {
 		heading: "Choose Your Investment",
 		lead: "150 units · Studios to 2-bed penthouses · 29.5–140 sqm · Freehold & Leasehold",
 		cards: [
-			{ name: "Studio", size: "From 29.5 sqm", price: "4.3M THB", kicker: "Highest rental demand", note: "The most liquid entry-level unit — designed for high occupancy, strong short-term rental demand, and fast resale potential.", tour: "https://720.3vjia.com/S149772386?lang=en-US-TP1317-ST4" },
+			{ name: "Studio", size: "From 29.5 sqm", price: "On request", kicker: "Highest rental demand", note: "The most liquid entry-level unit — designed for high occupancy, strong short-term rental demand, and fast resale potential.", tour: "https://720.3vjia.com/S149772386?lang=en-US-TP1317-ST4" },
 			{ name: "1 Bedroom", size: "From 37.5 sqm", price: "5.2M THB", popular: true, kicker: "Strong rental liquidity", note: "High-demand unit offering efficient layouts and excellent short- and long-term yield potential.", tour: "https://720.3vjia.com/S151277110?lang=en-US-TP1317-1B-A" },
 			{ name: "2 Bedroom", size: "From 60 sqm", price: "6.6M THB", kicker: "Family-friendly appeal", note: "A versatile layout with broader tenant appeal, longer stays, and stable, predictable rental performance.", tour: "https://720.3vjia.com/S150391738?lang=en-US-TP1317-2B-2" },
 			{ name: "1 Bedroom+", size: "From 44.4 sqm", price: "5.7M THB", kicker: "Elevated one-bedroom living", note: "An enhanced one-bedroom layout with extra space for modern living, ideal for those seeking comfort, functionality, and a seamless daily flow.", tour: "https://720.3vjia.com/S151296498?lang=en-US-TP-1317-1B-C" },
@@ -378,9 +378,9 @@ export const silhouette: ProjectData = {
 	},
 	developer: DEVELOPER,
 	flagship: {
-		heading: "The Zero Bang Tao — 70% Sold",
+		heading: "The Zero Bang Tao — 85% Sold",
 		sub: "Our Flagship Phuket Project",
-		text: "The Zero Bang Tao, our flagship 85-unit development, is 70% sold and under construction. Its success and award-winning design demonstrate our commitment to delivering world-class developments in Phuket.",
+		text: "The Zero Bang Tao, our flagship 85-unit development, is 85% sold and under construction. Its success and award-winning design demonstrate our commitment to delivering world-class developments in Phuket.",
 		stats: [
 			{ value: "85", label: "Units" },
 			{ value: "70%", label: "Sold" },
