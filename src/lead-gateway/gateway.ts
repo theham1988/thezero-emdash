@@ -157,13 +157,17 @@ function kommoPayload(body: Body, ref: string, recaptcha: { token: string; score
 	const { channel, source } = channelOf(body);
 	// Without a campaign UTM, the campaign field and tag carry the channel ("SEO", "Direct"...).
 	const campaign = body.utm_campaign || (channel === "Paid Search" || channel === "Campaign" ? "" : channel);
+	// A Google Ads click counts for SATI whichever page the enquiry is made on, so it gets
+	// the same two tags the ad landing pages send. Other paid sources (Meta, Bing) do not.
+	const fromGoogleAds = channel === "Paid Search" && (!!(body.gclid || body.gbraid || body.wbraid) || source.includes("google"));
+	const paidGoogleTags = fromGoogleAds ? ["SATI", "Google Ads"] : [];
 	const f = KOMMO.fields;
 	return {
 		name: body.name.trim(),
 		email: body.email.trim(),
 		phone: fullPhone(body),
 		pipeline_id: KOMMO.pipelineId,
-		tags: [...new Set([...form.tags, channel, project.tag, language, campaign || "direct"])].join(","),
+		tags: [...new Set([...form.tags, ...paidGoogleTags, channel, project.tag, language, campaign || "direct"])].join(","),
 		recaptcha_token: recaptcha.token,
 		custom_fields: {
 			[f.property]: project.property,
