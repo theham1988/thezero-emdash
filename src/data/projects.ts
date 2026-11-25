@@ -224,7 +224,7 @@ export const silhouette: ProjectData = {
 	metaTitle: "Silhouette, Nai Yang",
 	geo: { placename: "Nai Yang Beach, Phuket", position: "8.0806;98.2986" },
 	hero: {
-		image: `${U}/2026/05/nai-yang-exterior-01.webp`,
+		image: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool.webp`,
 		badges: ["By Award-Winning Developer", "Construction Started"],
 		title: "Boutique Eco-Living in Phuket's Coastal Zone",
 		lead: "350m from Nai Yang Beach, steps from Sirinat National Park, 7 minutes from the airport. EIA-approved condominiums with hotel-style amenities, 70/30 rental pool, and projected ~11% annual returns. From 5.12M THB.",
@@ -327,6 +327,8 @@ export const silhouette: ProjectData = {
 		heading: "Project Gallery",
 		note: "Click any image to enlarge · Arrow keys to navigate",
 		images: [
+			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool-and-bar.webp`, alt: "Silhouette by The Zero Phuket rooftop pool and bar at sunset" },
+			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool.webp`, alt: "Silhouette by The Zero Phuket rooftop pool and Zero Cafe & Bistro" },
 			{ src: `${U}/2026/06/01-nai-yang-exterior-01.webp`, alt: "Exterior" },
 			{ src: `${U}/2026/06/03-thzp_gal_4.webp`, alt: "Exterior detail" },
 			{ src: `${U}/2026/06/04-tzhp_gal_view.webp`, alt: "Top view" },
