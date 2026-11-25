@@ -327,8 +327,8 @@ export const silhouette: ProjectData = {
 		heading: "Project Gallery",
 		note: "Click any image to enlarge · Arrow keys to navigate",
 		images: [
-			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool-and-bar.webp`, alt: "Silhouette by The Zero Phuket rooftop pool and bar at sunset" },
-			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool.webp`, alt: "Silhouette by The Zero Phuket rooftop pool and Zero Cafe & Bistro" },
+			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool-and-bar.webp`, alt: "Rooftop pool & bar" },
+			{ src: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool.webp`, alt: "Rooftop pool" },
 			{ src: `${U}/2026/06/01-nai-yang-exterior-01.webp`, alt: "Exterior" },
 			{ src: `${U}/2026/06/03-thzp_gal_4.webp`, alt: "Exterior detail" },
 			{ src: `${U}/2026/06/04-tzhp_gal_view.webp`, alt: "Top view" },
