@@ -33,6 +33,10 @@ const organization = {
 ---
 
 <Site description={description} canonical={`${Astro.url.origin}/`} headerHtml={headerHtml} pageScript={homeScript + formScript} recaptcha>
+	<Fragment slot="head">
+		<link rel="preload" as="image" href="/images/hero/home-1-m.webp" media="(max-width:700px)" fetchpriority="high" />
+		<link rel="preload" as="image" href="/images/hero/home-1.webp" media="(min-width:701px)" fetchpriority="high" />
+	</Fragment>
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(organization)} />
 	<Fragment set:html={mainHtml} />
 </Site>

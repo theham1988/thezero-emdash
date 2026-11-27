@@ -88,6 +88,7 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 		<title>{fullTitle}</title>
 		<Fragment set:html={trackingHead} />
 		{extraMeta.map((m) => (m[0] === "property" ? <meta property={m[1]} content={m[2]} /> : <meta name={m[1]} content={m[2]} />))}
+		<slot name="head" />
 		<EmDashHead page={pageCtx} />
 		{(wp?.ld ?? []).map((d) => <script type="application/ld+json" is:inline set:html={JSON.stringify(d)} />)}
 		<link rel="icon" href="/wp-content/uploads/2025/09/logo_zero.png" />
