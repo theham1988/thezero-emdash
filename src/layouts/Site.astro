@@ -12,6 +12,7 @@ import defaultHeader from "../design/header.html?raw";
 import sharedScript from "../design/shared.js?raw";
 import { trackingBody, trackingHead } from "../tracking";
 import { resolveSiteIdentity } from "../utils/site";
+import wpSeoData from "../data/wp-seo.json";
 import "../design/styles.css";
 import "../styles/zero-extra.css";
 import "../styles/zero-premium.css";
@@ -39,7 +40,23 @@ const { title, pageTitle, description, image, canonical, robots, content, active
 const settingsResult = await getSiteSettingsWithCacheHint();
 if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
 const { siteTitle, siteTagline, titleSeparator } = resolveSiteIdentity(settingsResult.data);
-const fullTitle = title ? (title.includes(siteTitle) ? title : `${title} ${titleSeparator} ${siteTitle}`) : siteTitle;
+
+// Search tags carried over from the WordPress site, page by page (src/data/wp-seo.json).
+// Where a page has an entry, its title, description, robots, geo tags and structured data win.
+type WpSeo = { title: string; description: string; robots: string; meta: string[][]; ld: unknown[] };
+const DEFAULT_ROBOTS = "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large";
+const withSlash = (u: string) => (/\/$|\.[a-z0-9]+$/i.test(u) ? u : `${u}/`);
+const pathKey = withSlash(Astro.url.pathname);
+const wp = (wpSeoData as Record<string, WpSeo>)[pathKey];
+// WordPress wrote "Page - The Zero Phuket"; keep that form.
+const fullTitle = wp?.title || (title ? (title.includes(siteTitle) ? title : `${title} - ${siteTitle}`) : siteTitle);
+const metaDescription = wp ? wp.description : description || siteTagline || undefined;
+const robotsValue = robots ?? wp?.robots ?? DEFAULT_ROBOTS;
+const wpImage = wp?.meta.find((m) => m[1] === "og:image")?.[2];
+const shareImage = wpImage ? wpImage.replace("https://thezerophuket.com", Astro.url.origin) : image;
+// WordPress addresses end in a slash; that is the address Google has indexed.
+const canonicalUrl = withSlash((canonical ?? `${Astro.url.origin}${Astro.url.pathname}`).split("?")[0]);
+const extraMeta = (wp?.meta ?? []).filter((m) => m[1].startsWith("geo.") || m[1] === "ICBM" || m[1].startsWith("product:"));
 
 const pageCtx = createPublicPageContext({
 	Astro,
@@ -47,11 +64,11 @@ const pageCtx = createPublicPageContext({
 	pageType: "website",
 	title: fullTitle,
 	pageTitle: pageTitle ?? title ?? siteTitle,
-	description: description || siteTagline || undefined,
-	canonical: canonical ?? `${Astro.url.origin}${Astro.url.pathname}`,
-	image,
+	description: metaDescription,
+	canonical: canonicalUrl,
+	image: shareImage,
 	content,
-	seo: { ogImage: image, robots },
+	seo: { ogImage: shareImage, robots: robotsValue },
 	siteName: siteTitle,
 });
 
@@ -69,7 +86,9 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{fullTitle}</title>
 		<Fragment set:html={trackingHead} />
+		{extraMeta.map((m) => (m[0] === "property" ? <meta property={m[1]} content={m[2]} /> : <meta name={m[1]} content={m[2]} />))}
 		<EmDashHead page={pageCtx} />
+		{(wp?.ld ?? []).map((d) => <script type="application/ld+json" is:inline set:html={JSON.stringify(d)} />)}
 		<link rel="icon" href="/wp-content/uploads/2025/09/logo_zero.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

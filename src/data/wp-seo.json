@@ -1,0 +1,1643 @@
+{
+ "/": {
+  "title": "The Zero Phuket | Best Property Developer in Thailand",
+  "description": "The Zero Phuket leading property developer seaview located in Bang Tao and Naiyang Beach Phuket, Best price guaranteed. Optional property investment.",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [],
+  "ld": []
+ },
+ "/bang-tao/": {
+  "title": "New Condo for Sale in Bang Tao, Phuket | The Zero Phuket",
+  "description": "Discover The Zero Phuket Bangtao Beach, ultimate best condo in Bang Tao Beach. Visit us for exclusive deals and a world-class Property journey!",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "name",
+    "geo.region",
+    "TH-83"
+   ],
+   [
+    "name",
+    "geo.placename",
+    "Bang Tao Beach, Phuket"
+   ],
+   [
+    "name",
+    "geo.position",
+    "8.0030;98.2950"
+   ],
+   [
+    "name",
+    "ICBM",
+    "8.0030, 98.2950"
+   ],
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/05/eia_logo.webp"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "condo in bang tao beach"
+   ],
+   [
+    "property",
+    "product:brand",
+    "The Zero Bang Tao Beach Condo"
+   ],
+   [
+    "property",
+    "product:price:amount",
+    "6,000,000"
+   ],
+   [
+    "property",
+    "product:price:currency",
+    "THB"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ItemPage",
+      "@id": "https://thezerophuket.com/bang-tao/#webpage",
+      "url": "https://thezerophuket.com/bang-tao/",
+      "name": "New Condo for Sale in Bang Tao, Phuket | The Zero Phuket",
+      "datePublished": "2026-05-15T02:46:22+00:00",
+      "dateModified": "2026-10-30T20:14:16+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/sirijin/",
+      "name": "Sirijin Nuchet",
+      "url": "https://thezerophuket.com/author/sirijin/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "caption": "Sirijin Nuchet",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Product",
+      "name": "The Zero Bang Tao",
+      "description": "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and hotel-managed rental programme — projecting ~11% annual returns. EIA approved. From 6M THB.",
+      "sku": "200",
+      "brand": {
+       "@type": "Brand",
+       "name": "The Zero Bang Tao Beach Condo"
+      },
+      "offers": {
+       "@type": "Offer",
+       "url": "https://thezerophuket.com/bang-tao/",
+       "price": "6,000,000",
+       "priceCurrency": "THB",
+       "availability": "InStock",
+       "priceValidUntil": "2026-12-04"
+      },
+      "review": {
+       "@type": "Review",
+       "datePublished": "2026-05-15T02:46:22+00:00",
+       "dateModified": "2026-10-30T20:14:16+00:00",
+       "author": {
+        "@id": "https://thezerophuket.com/author/sirijin/",
+        "name": "Sirijin Nuchet"
+       },
+       "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.98"
+       }
+      },
+      "@id": "https://thezerophuket.com/bang-tao/#schema-119947",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/bang-tao/#webpage"
+      }
+     }
+    ]
+   },
+   {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "The Zero Bang Tao",
+    "description": "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and hotel-managed rental programme — projecting ~11% annual returns. EIA approved. From $130,000.",
+    "url": "https://thezerophuket.com/bang-tao/",
+    "aggregateRating": {
+     "@type": "AggregateRating",
+     "ratingValue": "5.0",
+     "reviewCount": "12",
+     "bestRating": "5",
+     "worstRating": "1"
+    }
+   }
+  ]
+ },
+ "/silhouette-nai-yang/": {
+  "title": "New Condo for Sale in Nai Yang Beach | The Zero Phuket",
+  "description": "Discover The Zero Phuket Nai Yang Beach, ultimate new condo in Nai Yang Beach. Visit us for exclusive deals and a world-class Property journey!",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "name",
+    "geo.region",
+    "TH-83"
+   ],
+   [
+    "name",
+    "geo.placename",
+    "Nai Yang Beach, Phuket"
+   ],
+   [
+    "name",
+    "geo.position",
+    "8.0806;98.2986"
+   ],
+   [
+    "name",
+    "ICBM",
+    "8.0806, 98.2986"
+   ],
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/05/mobile_hero.webp"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "condo for sale in nai yang"
+   ],
+   [
+    "property",
+    "product:brand",
+    "Silhouette Nai Yang by The Zero Phuket"
+   ],
+   [
+    "property",
+    "product:price:amount",
+    "5,120,000"
+   ],
+   [
+    "property",
+    "product:price:currency",
+    "THB"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ItemPage",
+      "@id": "https://thezerophuket.com/silhouette-nai-yang/#webpage",
+      "url": "https://thezerophuket.com/silhouette-nai-yang/",
+      "name": "New Condo for Sale in Nai Yang Beach | The Zero Phuket",
+      "datePublished": "2026-05-22T15:20:31+00:00",
+      "dateModified": "2026-10-16T12:20:25+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/05/logo.svg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/sirijin/",
+      "name": "Sirijin Nuchet",
+      "url": "https://thezerophuket.com/author/sirijin/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "caption": "Sirijin Nuchet",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Product",
+      "name": "The Zero Nai Yang | Condo in Nai Yang Beach",
+      "description": "300m from Nai Yang Beach, steps from Sirinat National Park, 7 minutes from the airport. EIA-approved condominiums with hotel-style amenities, 70/30 rental pool, and projected ~11% annual returns. From 5.12M THB.",
+      "sku": "200",
+      "brand": {
+       "@type": "Brand",
+       "name": "Silhouette Nai Yang by The Zero Phuket"
+      },
+      "offers": {
+       "@type": "Offer",
+       "url": "https://thezerophuket.com/silhouette-nai-yang/",
+       "price": "5,120,000",
+       "priceCurrency": "THB",
+       "availability": "InStock",
+       "priceValidUntil": "2026-12-04"
+      },
+      "review": {
+       "@type": "Review",
+       "datePublished": "2026-05-22T15:20:31+00:00",
+       "dateModified": "2026-10-16T12:20:25+00:00",
+       "author": {
+        "@id": "https://thezerophuket.com/author/sirijin/",
+        "name": "Sirijin Nuchet"
+       },
+       "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+       }
+      },
+      "@id": "https://thezerophuket.com/silhouette-nai-yang/#schema-119943",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/silhouette-nai-yang/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/silhouette-nai-yang/earth-residences/": {
+  "title": "Earth Residences - The Zero Phuket",
+  "description": "Earth Residences is being released at introductory launch pricing. As construction progresses and inventory is absorbed, future releases may be offered at",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "name",
+    "geo.region",
+    "TH-83"
+   ],
+   [
+    "name",
+    "geo.placename",
+    "Nai Yang Beach, Phuket"
+   ],
+   [
+    "name",
+    "geo.position",
+    "8.0806;98.2986"
+   ],
+   [
+    "name",
+    "ICBM",
+    "8.0806, 98.2986"
+   ],
+   [
+    "property",
+    "og:type",
+    "article"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/silhouette-nai-yang/earth-residences/#webpage",
+      "url": "https://thezerophuket.com/silhouette-nai-yang/earth-residences/",
+      "name": "Earth Residences - The Zero Phuket",
+      "datePublished": "2026-06-12T15:00:27+00:00",
+      "dateModified": "2026-06-12T15:06:26+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/vamsijanaki/",
+      "name": "Vamsi J",
+      "url": "https://thezerophuket.com/author/vamsijanaki/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/9d3b2c0468dd8a2d733a85aa94850e60.jpg?ver=1794723294",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/9d3b2c0468dd8a2d733a85aa94850e60.jpg?ver=1794723294",
+       "caption": "Vamsi J",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "Earth Residences - The Zero Phuket",
+      "datePublished": "2026-06-12T15:00:27+00:00",
+      "dateModified": "2026-06-12T15:06:26+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/vamsijanaki/",
+       "name": "Vamsi J"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Earth Residences is being released at introductory launch pricing. As construction progresses and inventory is absorbed, future releases may be offered at",
+      "name": "Earth Residences - The Zero Phuket",
+      "@id": "https://thezerophuket.com/silhouette-nai-yang/earth-residences/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/silhouette-nai-yang/earth-residences/#webpage"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/silhouette-nai-yang/earth-residences/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/about-us/": {
+  "title": "About Us - The Zero Phuket",
+  "description": "Founded in London in 2019, The Zero set an unprecedented benchmark for eco-luxury with its sell-out zero-carbon The Zero London project and is now redefining",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/04/DOT-Property-Awards_img.jpg"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "About Us"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/04/DOT-Property-Awards_img.jpg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/04/DOT-Property-Awards_img.jpg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/about-us/#webpage",
+      "url": "https://thezerophuket.com/about-us/",
+      "name": "About Us - The Zero Phuket",
+      "datePublished": "2025-09-30T16:01:46+00:00",
+      "dateModified": "2026-11-19T03:51:48+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/04/DOT-Property-Awards_img.jpg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "About Us - The Zero Phuket",
+      "datePublished": "2025-09-30T16:01:46+00:00",
+      "dateModified": "2026-11-19T03:51:48+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Founded in London in 2019, The Zero set an unprecedented benchmark for eco-luxury with its sell-out zero-carbon The Zero London project and is now redefining",
+      "name": "About Us - The Zero Phuket",
+      "@id": "https://thezerophuket.com/about-us/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/about-us/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/04/DOT-Property-Awards_img.jpg"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/about-us/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/condo-phuket-beachfront/": {
+  "title": "คอนโดภูเก็ตติดทะเล ราคา ทำเลดี 2569 | The Zero Phuket",
+  "description": "รวมคอนโดภูเก็ตติดทะเลทำเลดีทุกหาด ทั้งบางเทา สุรินทร์ กมลา และป่าตอง พร้อมราคาเริ่มต้น ผลตอบแทนค่าเช่า และเช็กลิสต์ก่อนซื้อจากผู้เชี่ยวชาญในพื้นที่ ดูข้อมูลครบที่นี่",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/06/condo-phuket-beachfront.jpg"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "condo-phuket-beachfront"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/06/condo-phuket-beachfront-1024x538.jpg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/06/condo-phuket-beachfront-1024x538.jpg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/condo-phuket-beachfront/#webpage",
+      "url": "https://thezerophuket.com/condo-phuket-beachfront/",
+      "name": "คอนโดภูเก็ตติดทะเล ราคา ทำเลดี 2569 | The Zero Phuket",
+      "datePublished": "2026-06-12T09:21:40+00:00",
+      "dateModified": "2026-09-07T05:35:49+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/06/condo-phuket-beachfront-1024x538.jpg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/sirijin/",
+      "name": "Sirijin Nuchet",
+      "url": "https://thezerophuket.com/author/sirijin/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "caption": "Sirijin Nuchet",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "คอนโดภูเก็ตติดทะเล ราคา ทำเลดี 2569 | The Zero Phuket",
+      "datePublished": "2026-06-12T09:21:40+00:00",
+      "dateModified": "2026-09-07T05:35:49+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/sirijin/",
+       "name": "Sirijin Nuchet"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "รวมคอนโดภูเก็ตติดทะเลทำเลดีทุกหาด ทั้งบางเทา สุรินทร์ กมลา และป่าตอง พร้อมราคาเริ่มต้น ผลตอบแทนค่าเช่า และเช็กลิสต์ก่อนซื้อจากผู้เชี่ยวชาญในพื้นที่ ดูข้อมูลครบที่นี่",
+      "name": "คอนโดภูเก็ตติดทะเล ราคา ทำเลดี 2569 | The Zero Phuket",
+      "@id": "https://thezerophuket.com/condo-phuket-beachfront/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/condo-phuket-beachfront/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/06/condo-phuket-beachfront-1024x538.jpg"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/condo-phuket-beachfront/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/contact/": {
+  "title": "Contact - The Zero Phuket",
+  "description": "Contact US",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/contact/#webpage",
+      "url": "https://thezerophuket.com/contact/",
+      "name": "Contact - The Zero Phuket",
+      "datePublished": "2025-09-30T16:02:20+00:00",
+      "dateModified": "2026-04-02T09:59:58+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "Contact - The Zero Phuket",
+      "datePublished": "2025-09-30T16:02:20+00:00",
+      "dateModified": "2026-04-02T09:59:58+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Contact US",
+      "name": "Contact - The Zero Phuket",
+      "@id": "https://thezerophuket.com/contact/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/contact/#webpage"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/contact/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/gallery/": {
+  "title": "Gallery - The Zero Phuket",
+  "description": "",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2025/10/bedroomsec-1.jpg"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "Gallery"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/bedroomsec-1.jpg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2025/10/bedroomsec-1.jpg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/gallery/#webpage",
+      "url": "https://thezerophuket.com/gallery/",
+      "name": "Gallery - The Zero Phuket",
+      "datePublished": "2025-10-13T16:57:08+00:00",
+      "dateModified": "2026-10-30T19:48:59+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/bedroomsec-1.jpg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "Gallery - The Zero Phuket",
+      "datePublished": "2025-10-13T16:57:08+00:00",
+      "dateModified": "2026-10-30T19:48:59+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": " https://www.youtube.com/watch?v=y2zcaODbWMAhttps://www.youtube.com/watch?v=GGLEZLe1MHMhttps://youtu.be/cp3J5vUPDAw?si=A2SRpm5oUdQ6NIh7https://youtu.be/5JmkG_ZnS9w?si=UKGqkIKzseh2bpbY ",
+      "name": "Gallery - The Zero Phuket",
+      "@id": "https://thezerophuket.com/gallery/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/gallery/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/bedroomsec-1.jpg"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/gallery/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/london/": {
+  "title": "London - The Zero Phuket",
+  "description": "The Zero London, a sustainable, zero-carbon living project in the UK, has earned multiple awards, including the Energy Efficiency Award 2022 for Best London",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2025/10/TheZero-London-Logo-GreenwithYellow-V1-1024x912.png"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "London"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/TheZero-London-Logo-GreenwithYellow-V1-1024x912.png",
+      "url": "https://thezerophuket.com/wp-content/uploads/2025/10/TheZero-London-Logo-GreenwithYellow-V1-1024x912.png",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/london/#webpage",
+      "url": "https://thezerophuket.com/london/",
+      "name": "London - The Zero Phuket",
+      "datePublished": "2025-10-22T05:40:38+00:00",
+      "dateModified": "2026-04-29T06:20:11+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/TheZero-London-Logo-GreenwithYellow-V1-1024x912.png"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "London - The Zero Phuket",
+      "datePublished": "2025-10-22T05:40:38+00:00",
+      "dateModified": "2026-04-29T06:20:11+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "The Zero London, a sustainable, zero-carbon living project in the UK, has earned multiple awards, including the Energy Efficiency Award 2022 for Best London",
+      "name": "London - The Zero Phuket",
+      "@id": "https://thezerophuket.com/london/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/london/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2025/10/TheZero-London-Logo-GreenwithYellow-V1-1024x912.png"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/london/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/pdpa-privacy-notice-terms/": {
+  "title": "PDPA Privacy Notice & Terms - The Zero Phuket",
+  "description": "Effective Date: 27.08.2025",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/pdpa-privacy-notice-terms/#webpage",
+      "url": "https://thezerophuket.com/pdpa-privacy-notice-terms/",
+      "name": "PDPA Privacy Notice &amp; Terms - The Zero Phuket",
+      "datePublished": "2025-10-13T09:57:58+00:00",
+      "dateModified": "2026-10-07T19:22:27+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "PDPA Privacy Notice &amp; Terms - The Zero Phuket",
+      "datePublished": "2025-10-13T09:57:58+00:00",
+      "dateModified": "2026-10-07T19:22:27+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Effective Date: 27.08.2025",
+      "name": "PDPA Privacy Notice &amp; Terms - The Zero Phuket",
+      "@id": "https://thezerophuket.com/pdpa-privacy-notice-terms/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/pdpa-privacy-notice-terms/#webpage"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/pdpa-privacy-notice-terms/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/projects/": {
+  "title": "Projects - The Zero Phuket",
+  "description": "Award-winning zero-carbon development completed in 2022, The Zero London delivered energy self-sufficient living with cutting-edge design, technology, and",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/03/tzp_london_grid.jpg"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "Projects"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/03/tzp_london_grid.jpg",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/03/tzp_london_grid.jpg",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/projects/#webpage",
+      "url": "https://thezerophuket.com/projects/",
+      "name": "Projects - The Zero Phuket",
+      "datePublished": "2025-09-30T16:01:51+00:00",
+      "dateModified": "2026-08-20T20:45:29+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/03/tzp_london_grid.jpg"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "name": "thezerobangtao.com",
+      "url": "https://thezerophuket.com/author/thezerobangtao-com/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/66bafc460d2ce0fe29638f8272b637be.jpg?ver=1794968768",
+       "caption": "thezerobangtao.com",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "Projects - The Zero Phuket",
+      "datePublished": "2025-09-30T16:01:51+00:00",
+      "dateModified": "2026-08-20T20:45:29+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/thezerobangtao-com/",
+       "name": "thezerobangtao.com"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Award-winning zero-carbon development completed in 2022, The Zero London delivered energy self-sufficient living with cutting-edge design, technology, and",
+      "name": "Projects - The Zero Phuket",
+      "@id": "https://thezerophuket.com/projects/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/projects/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/03/tzp_london_grid.jpg"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/projects/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/rentals/": {
+  "title": "New Condo for Sale in Bang Tao, Phuket | The Zero Phuket",
+  "description": "Discover The Zero Phuket Bangtao Beach, ultimate best condo in Bang Tao Beach. Visit us for exclusive deals and a world-class Property journey!",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/08/Type-F-Bedroom-1024x895.webp"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "condo in bang tao beach"
+   ],
+   [
+    "property",
+    "product:brand",
+    "The Zero Bang Tao Beach Condo"
+   ],
+   [
+    "property",
+    "product:price:amount",
+    "4,600,000"
+   ],
+   [
+    "property",
+    "product:price:currency",
+    "THB"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/08/Type-F-Bedroom-1024x895.webp",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/08/Type-F-Bedroom-1024x895.webp",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ItemPage",
+      "@id": "https://thezerophuket.com/rentals/#webpage",
+      "url": "https://thezerophuket.com/rentals/",
+      "name": "New Condo for Sale in Bang Tao, Phuket | The Zero Phuket",
+      "datePublished": "2026-08-20T20:32:57+00:00",
+      "dateModified": "2026-10-07T17:25:17+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/08/Type-F-Bedroom-1024x895.webp"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/sirijin/",
+      "name": "Sirijin Nuchet",
+      "url": "https://thezerophuket.com/author/sirijin/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/de97deb9d8493825be6a56dc6294b57e.jpg?ver=1794960858",
+       "caption": "Sirijin Nuchet",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Product",
+      "name": "The Zero Bang Tao",
+      "description": "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and hotel-managed rental programme — projecting ~11% annual returns. EIA approved. From 4.6M THB.",
+      "sku": "200",
+      "brand": {
+       "@type": "Brand",
+       "name": "The Zero Bang Tao Beach Condo"
+      },
+      "offers": {
+       "@type": "Offer",
+       "url": "https://thezerophuket.com/rentals/",
+       "price": "4,600,000",
+       "priceCurrency": "THB",
+       "availability": "InStock",
+       "priceValidUntil": "2026-12-04"
+      },
+      "review": {
+       "@type": "Review",
+       "datePublished": "2026-08-20T20:32:57+00:00",
+       "dateModified": "2026-10-07T17:25:17+00:00",
+       "author": {
+        "@id": "https://thezerophuket.com/author/sirijin/",
+        "name": "Sirijin Nuchet"
+       },
+       "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.98"
+       }
+      },
+      "@id": "https://thezerophuket.com/rentals/#schema-132508",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/rentals/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "/rentals/the-zero-bang-tao/": {
+  "title": "The zero Bang Tao - The Zero Phuket",
+  "description": "Studio",
+  "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "meta": [
+   [
+    "property",
+    "og:type",
+    "article"
+   ],
+   [
+    "property",
+    "og:image",
+    "https://thezerophuket.com/wp-content/uploads/2026/08/The-Zero-Bang-Tao-exterior.webp"
+   ],
+   [
+    "property",
+    "og:image:alt",
+    "The zero Bang Tao"
+   ]
+  ],
+  "ld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": [
+       "HomeAndConstructionBusiness",
+       "Organization"
+      ],
+      "@id": "https://thezerophuket.com/#organization",
+      "name": "Zero Developments co. LTD",
+      "url": "https://thezerophuket.com",
+      "logo": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/#logo",
+       "url": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "contentUrl": "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg",
+       "caption": "The Zero Phuket",
+       "inLanguage": "en-US",
+       "width": "68",
+       "height": "60"
+      },
+      "openingHours": [
+       "Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"
+      ],
+      "image": {
+       "@id": "https://thezerophuket.com/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://thezerophuket.com/#website",
+      "url": "https://thezerophuket.com",
+      "name": "The Zero Phuket",
+      "alternateName": "Zero Developments",
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "ImageObject",
+      "@id": "https://thezerophuket.com/wp-content/uploads/2026/08/The-Zero-Bang-Tao-exterior.webp",
+      "url": "https://thezerophuket.com/wp-content/uploads/2026/08/The-Zero-Bang-Tao-exterior.webp",
+      "width": "200",
+      "height": "200",
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://thezerophuket.com/rentals/the-zero-bang-tao/#webpage",
+      "url": "https://thezerophuket.com/rentals/the-zero-bang-tao/",
+      "name": "The zero Bang Tao - The Zero Phuket",
+      "datePublished": "2026-08-20T20:57:44+00:00",
+      "dateModified": "2026-10-09T11:36:02+00:00",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/#website"
+      },
+      "primaryImageOfPage": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/08/The-Zero-Bang-Tao-exterior.webp"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Person",
+      "@id": "https://thezerophuket.com/author/waseem/",
+      "name": "Waseem",
+      "url": "https://thezerophuket.com/author/waseem/",
+      "image": {
+       "@type": "ImageObject",
+       "@id": "https://thezerophuket.com/wp-content/litespeed/avatar/2be7899c79a0cba965657f2f32e747d9.jpg?ver=1794671478",
+       "url": "https://thezerophuket.com/wp-content/litespeed/avatar/2be7899c79a0cba965657f2f32e747d9.jpg?ver=1794671478",
+       "caption": "Waseem",
+       "inLanguage": "en-US"
+      },
+      "worksFor": {
+       "@id": "https://thezerophuket.com/#organization"
+      }
+     },
+     {
+      "@type": "Article",
+      "headline": "The zero Bang Tao - The Zero Phuket",
+      "datePublished": "2026-08-20T20:57:44+00:00",
+      "dateModified": "2026-10-09T11:36:02+00:00",
+      "author": {
+       "@id": "https://thezerophuket.com/author/waseem/",
+       "name": "Waseem"
+      },
+      "publisher": {
+       "@id": "https://thezerophuket.com/#organization"
+      },
+      "description": "Studio",
+      "name": "The zero Bang Tao - The Zero Phuket",
+      "@id": "https://thezerophuket.com/rentals/the-zero-bang-tao/#richSnippet",
+      "isPartOf": {
+       "@id": "https://thezerophuket.com/rentals/the-zero-bang-tao/#webpage"
+      },
+      "image": {
+       "@id": "https://thezerophuket.com/wp-content/uploads/2026/08/The-Zero-Bang-Tao-exterior.webp"
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": {
+       "@id": "https://thezerophuket.com/rentals/the-zero-bang-tao/#webpage"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

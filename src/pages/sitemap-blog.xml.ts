@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ url }) => {
 		const when = e.data.updated_at ?? e.data.updatedAt ?? e.data.published_at ?? e.data.publishedAt;
 		const date = when ? new Date(when) : null;
 		const lastmod = date && !Number.isNaN(date.getTime()) ? `\n    <lastmod>${date.toISOString()}</lastmod>` : "";
-		return `  <url>\n    <loc>${xml(`${url.origin}/${e.id}`)}</loc>${lastmod}\n  </url>`;
+		return `  <url>\n    <loc>${xml(`${url.origin}/${e.id}/`)}</loc>${lastmod}\n  </url>`;
 	});
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
