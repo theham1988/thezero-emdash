@@ -6,6 +6,8 @@
  * Mirrors what thezerophuket.com/invest-sati ran on WordPress:
  * two GTM containers + the Google Ads global tag.
  */
+import attribution from "../public/js/zp-attribution.js?raw";
+
 export const GTM_IDS = ["GTM-PZ7QT22L", "GTM-KRW84GHM"] as const;
 export const GOOGLE_ADS_ID = "AW-16593439829";
 
@@ -14,7 +16,7 @@ const gtmLoader = (id: string) =>
 
 /** Goes as high in <head> as possible. */
 export const trackingHead = [
-	`<script src="/js/zp-attribution.js"></script>`,
+	`<script>${attribution}</script>`,
 	`<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GOOGLE_ADS_ID}');</script>`,
 	`<script async src="https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}"></script>`,
 	...GTM_IDS.map((id) => `<script>${gtmLoader(id)}</script>`),

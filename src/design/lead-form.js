@@ -19,7 +19,7 @@
       submit.disabled = true;
       try {
         let token = '';
-        try { token = await grecaptcha.enterprise.execute(KEY, {action: 'submit_lead'}); } catch (rcErr) { console.warn('reCAPTCHA failed', rcErr); }
+        try { if (window.zpRecaptcha) await window.zpRecaptcha(); token = await grecaptcha.enterprise.execute(KEY, {action: 'submit_lead'}); } catch (rcErr) { console.warn('reCAPTCHA failed', rcErr); }
         const val = n => (f.elements[n] && f.elements[n].value) || '';
         const payload = {
           form_id: f.dataset.leadForm,

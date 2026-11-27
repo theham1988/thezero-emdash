@@ -63,7 +63,7 @@ const pageCtx = createPublicPageContext({
 	kind: content ? "content" : "custom",
 	pageType: "website",
 	title: fullTitle,
-	pageTitle: pageTitle ?? title ?? siteTitle,
+	pageTitle: wp?.title ?? pageTitle ?? title ?? siteTitle,
 	description: metaDescription,
 	canonical: canonicalUrl,
 	image: shareImage,
@@ -76,6 +76,7 @@ let header = headerHtml ?? defaultHeader;
 if (!headerHtml && active) {
 	header = header.replace(`<a href="${active}">`, `<a href="${active}" class="active" aria-current="page">`);
 }
+const FONTS = "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600&family=Dosis:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap";
 const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 ---
 
@@ -92,11 +93,25 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 		<link rel="icon" href="/wp-content/uploads/2025/09/logo_zero.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600&family=Dosis:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
-			rel="stylesheet"
-		/>
-		{recaptcha && <script is:inline src={`https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_KEY}`} async defer />}
+		<link rel="stylesheet" href={FONTS} media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href={FONTS} /></noscript>
+		{recaptcha && <script is:inline define:vars={{ RECAPTCHA_KEY }}>
+			// reCAPTCHA loads on the visitor's first touch, scroll or key press, so it does not slow the first paint.
+			// Forms wait on window.zpRecaptcha() before asking for a token.
+			(() => {
+				let p;
+				window.zpRecaptcha = () => p || (p = new Promise((done) => {
+					const s = document.createElement("script");
+					s.src = "https://www.google.com/recaptcha/enterprise.js?render=" + RECAPTCHA_KEY;
+					s.onload = () => (window.grecaptcha && grecaptcha.enterprise ? grecaptcha.enterprise.ready(done) : done());
+					s.onerror = done;
+					setTimeout(done, 5000);
+					document.head.appendChild(s);
+				}));
+				const go = () => { window.zpRecaptcha(); ["pointerdown", "keydown", "scroll", "touchstart"].forEach((e) => removeEventListener(e, go)); };
+				["pointerdown", "keydown", "scroll", "touchstart"].forEach((e) => addEventListener(e, go, { passive: true, once: true }));
+			})();
+		</script>}
 		{recaptcha && <script is:inline src="/js/zp-phone.js" defer />}
 	</head>
 	<body>
@@ -121,7 +136,14 @@ const RECAPTCHA_KEY = "6Ldwts0sAAAAAJyCO0rUaBgYx5eiQM4voxaURbmV";
 			})();
 		</script>
 		<div id="google_translate_element" hidden></div>
-		<script is:inline src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+		<script is:inline>
+			// Google Translate is only needed once a visitor has picked another language.
+			if (/googtrans=\/en\/(?!en)/.test(document.cookie)) {
+				const t = document.createElement("script");
+				t.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+				document.body.appendChild(t);
+			}
+		</script>
 		<EmDashBodyEnd page={pageCtx} />
 	</body>
 </html>

@@ -98,8 +98,9 @@
   const sub = document.getElementById('heroSub');
   const cta = document.getElementById('heroCta');
   const dotsWrap = document.getElementById('heroDots');
-  const load = s => { if (!s.style.backgroundImage) s.style.backgroundImage = `url("${s.dataset.bg}")`; };
-  let current = 0, timer;
+  const small = matchMedia('(max-width:700px)').matches;
+  const load = s => { if (!s.style.backgroundImage) s.style.backgroundImage = `url("${(small && s.dataset.bgM) || s.dataset.bg}")`; };
+  let current = 0, timer, preT;
   const dots = slides.map((s, i) => {
     const d = document.createElement('button');
     d.className = 'dot'; d.setAttribute('aria-label', 'Slide ' + (i + 1));
@@ -109,7 +110,9 @@
   });
   const go = i => {
     current = (i + slides.length) % slides.length;
-    load(slides[current]); load(slides[(current + 1) % slides.length]);
+    load(slides[current]);
+    // Fetch the next picture a little before it is shown, never during the first paint.
+    clearTimeout(preT); preT = setTimeout(() => load(slides[(current + 1) % slides.length]), 3000);
     slides.forEach((s, j) => s.classList.toggle('active', j === current));
     dots.forEach((d, j) => d.classList.toggle('active', j === current));
     sub.classList.add('fade');

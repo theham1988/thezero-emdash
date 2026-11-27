@@ -18,7 +18,7 @@
     submit.disabled = true;
     try {
       let recaptchaToken = '';
-      try { recaptchaToken = await grecaptcha.enterprise.execute(LEAD_RECAPTCHA_KEY, {action: 'submit_lead'}); }
+      try { if (window.zpRecaptcha) await window.zpRecaptcha(); recaptchaToken = await grecaptcha.enterprise.execute(LEAD_RECAPTCHA_KEY, {action: 'submit_lead'}); }
       catch (rcErr) { console.warn('reCAPTCHA failed', rcErr); }
       const payload = {
         form_id: 'website_home',
