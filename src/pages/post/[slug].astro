@@ -34,10 +34,15 @@ const seo = getSeoMeta(post, {
 	defaultDescription: post.data.seo_description || post.data.excerpt || firstParagraph(post.data.content) || undefined,
 	defaultOgImage: ogImage,
 });
+// A title imported from WordPress is shown exactly as WordPress showed it: no site name added, "&amp;" read as "&".
+const wpTitle = seo.title === post.data.seo_title && post.data.seo_title
+	? String(post.data.seo_title).replace(/&amp;/g, "&").replace(/&#0?39;|&rsquo;/g, "'").trim()
+	: undefined;
 ---
 
 <Site
-	title={seo.title}
+	title={wpTitle ?? seo.title}
+	exactTitle={!!wpTitle && seo.title === post.data.seo_title}
 	pageTitle={post.data.title}
 	description={seo.description}
 	image={seo.ogImage}

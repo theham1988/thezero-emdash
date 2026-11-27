@@ -19,6 +19,8 @@ import "../styles/zero-premium.css";
 
 interface Props {
 	title?: string;
+	/** Use the title exactly as given, without adding the site name (SEO titles carried over from WordPress). */
+	exactTitle?: boolean;
 	pageTitle?: string | null;
 	description?: string | null;
 	image?: string | null;
@@ -35,7 +37,7 @@ interface Props {
 	recaptcha?: boolean;
 }
 
-const { title, pageTitle, description, image, canonical, robots, content, active, headerHtml, pageScript, recaptcha } = Astro.props;
+const { title, exactTitle, pageTitle, description, image, canonical, robots, content, active, headerHtml, pageScript, recaptcha } = Astro.props;
 
 const settingsResult = await getSiteSettingsWithCacheHint();
 if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
@@ -49,7 +51,7 @@ const withSlash = (u: string) => (/\/$|\.[a-z0-9]+$/i.test(u) ? u : `${u}/`);
 const pathKey = withSlash(Astro.url.pathname);
 const wp = (wpSeoData as Record<string, WpSeo>)[pathKey];
 // WordPress wrote "Page - The Zero Phuket"; keep that form.
-const fullTitle = wp?.title || (title ? (title.includes(siteTitle) ? title : `${title} - ${siteTitle}`) : siteTitle);
+const fullTitle = wp?.title || (title ? (exactTitle || title.includes(siteTitle) ? title : `${title} - ${siteTitle}`) : siteTitle);
 const metaDescription = wp ? wp.description : description || siteTagline || undefined;
 const robotsValue = robots ?? wp?.robots ?? DEFAULT_ROBOTS;
 const wpImage = wp?.meta.find((m) => m[1] === "og:image")?.[2];
