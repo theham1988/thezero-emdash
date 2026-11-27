@@ -10,6 +10,19 @@ export { EmDashRoom, EmDashRoomSite, PluginBridge };
 /** The one address the public site lives at. Its DNS is at Hostinger; see wrangler.jsonc. */
 const LIVE_HOST = "thezerophuket.com";
 
+/** Redirects carried over from Rank Math on the WordPress site (old address -> new address). */
+const OLD_REDIRECTS: Record<string, string> = {
+	"/d-ny": "/",
+	"/ru/the-zero-bangtao-condo-hotel-ru": "/bang-tao/",
+	"/ru/the-zero-bangtao-condo-hotel-ru__trashed": "/bang-tao/",
+	"/ru/investor-proposal-ru": "/",
+	"/investor-proposal": "/",
+	"/index.php/investor-proposal": "/",
+	"/hello-world": "/",
+	"/sample-page": "/",
+	"/ru/author/thezerobangtao-com": "/bang-tao/",
+};
+
 export default {
 	...handler,
 	async fetch(request, env, ctx) {
@@ -19,6 +32,9 @@ export default {
 		if (url.hostname === `www.${LIVE_HOST}`) {
 			return Response.redirect(`https://${LIVE_HOST}${url.pathname}${url.search}`, 301);
 		}
+
+		const old = OLD_REDIRECTS[url.pathname.replace(/\/+$/, "")];
+		if (old) return Response.redirect(`${url.origin}${old}`, 301);
 
 		const response = await handler.fetch!(request, env, ctx);
 

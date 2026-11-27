@@ -38,6 +38,28 @@ const seo = getSeoMeta(post, {
 const wpTitle = seo.title === post.data.seo_title && post.data.seo_title
 	? String(post.data.seo_title).replace(/&amp;/g, "&").replace(/&#0?39;|&rsquo;/g, "'").trim()
 	: undefined;
+// Structured data as Rank Math wrote it on WordPress: the company, the website, the page and the article.
+const postUrl = `${Astro.url.origin}/${post.id}/`;
+const iso = (v: unknown) => { const d = v ? new Date(v as string) : null; return d && !Number.isNaN(d.getTime()) ? d.toISOString() : undefined; };
+const published = iso(post.data.published_at ?? post.data.publishedAt);
+const modified = iso(post.data.updated_at ?? post.data.updatedAt) ?? published;
+const ORG = "https://thezerophuket.com/#organization", WEBSITE = "https://thezerophuket.com/#website";
+const articleSchema = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": ["HomeAndConstructionBusiness", "Organization"], "@id": ORG, name: "Zero Developments co. LTD", url: "https://thezerophuket.com",
+			logo: { "@type": "ImageObject", "@id": "https://thezerophuket.com/#logo", url: "https://thezerophuket.com/wp-content/uploads/2025/09/LOGO.svg", caption: "The Zero Phuket", inLanguage: "en-US" },
+			openingHours: ["Mo,Tu,We,Th,Fr,Sa,Su 09:00-17:00"], image: { "@id": "https://thezerophuket.com/#logo" },
+		},
+		{ "@type": "WebSite", "@id": WEBSITE, url: "https://thezerophuket.com", name: "The Zero Phuket", alternateName: "Zero Developments", publisher: { "@id": ORG }, inLanguage: "en-US" },
+		{ "@type": "WebPage", "@id": `${postUrl}#webpage`, url: postUrl, name: wpTitle ?? seo.title, datePublished: published, dateModified: modified, isPartOf: { "@id": WEBSITE }, inLanguage: "en-US" },
+		{
+			"@type": "BlogPosting", "@id": `${postUrl}#richSnippet`, headline: wpTitle ?? seo.title, description: seo.description, datePublished: published, dateModified: modified,
+			image: seo.ogImage || undefined, author: { "@id": ORG }, publisher: { "@id": ORG }, isPartOf: { "@id": `${postUrl}#webpage` }, mainEntityOfPage: { "@id": `${postUrl}#webpage` }, inLanguage: "en-US",
+		},
+	],
+};
 ---
 
 <Site
@@ -51,5 +73,6 @@ const wpTitle = seo.title === post.data.seo_title && post.data.seo_title
 	content={{ collection: "posts", id: post.data.id, slug: post.id }}
 	active="/media"
 >
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
 	<PostView post={post} />
 </Site>

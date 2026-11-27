@@ -7,6 +7,6 @@ import type { APIRoute } from "astro";
 export const prerender = false;
 
 export const GET: APIRoute = ({ url }) =>
-	new Response(`User-agent: *\nAllow: /\n\n# Admin and API\nDisallow: /_emdash/\n\nSitemap: ${url.origin}/sitemap.xml\n`, {
+	new Response(`User-agent: *\nAllow: /\n\n# Admin and API\nDisallow: /_emdash/\n\nSitemap: ${url.origin}/sitemap_index.xml\nSitemap: ${url.origin}/sitemap.xml\n`, {
 		headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" },
 	});
