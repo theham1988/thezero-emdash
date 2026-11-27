@@ -78,7 +78,7 @@ export const bangTao: ProjectData = {
 	hero: {
 		image: `${U}/2026/05/heroBuilding.webp`,
 		badges: ["Award Winner 2025", "85% Sold"],
-		title: "Award-Winning Sustainable Condos in Bang Tao",
+		title: "New Condo for Sale in Bang Tao, Phuket",
 		lead: "Phuket's first single-use plastic-free condominium. 85 exclusive units with rooftop pool, sky bar, and in-house managed rental programme — projecting ~11% annual returns. EIA approved. From 6M THB.",
 	},
 	heroStats: [
@@ -226,7 +226,7 @@ export const silhouette: ProjectData = {
 	hero: {
 		image: `${U}/2026/11/Silhouette-by-The-Zero-Phuket-rooftop-pool.webp`,
 		badges: ["By Award-Winning Developer", "Construction Started"],
-		title: "Boutique Eco-Living in Phuket's Coastal Zone",
+		title: "New Condo for Sale in Nai Yang Beach",
 		lead: "350m from Nai Yang Beach, steps from Sirinat National Park, 7 minutes from the airport. EIA-approved condominiums with hotel-style amenities, 70/30 rental pool, and projected ~11% annual returns. From 5.12M THB.",
 	},
 	heroStats: [
